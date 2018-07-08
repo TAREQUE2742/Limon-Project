@@ -1,0 +1,53 @@
+﻿@using System.Web.UI.WebControls
+@using LimonSelling.Models
+
+@{
+    ViewBag.Title = "OrderNow";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+
+<h2>Cart Details</h2>
+@using (Html.BeginForm("UpdateOrder", "Public", FormMethod.Post))
+{
+    <table class="table table-hover">
+        <tr>
+            <th>Remove</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>SubTotal</th>
+        </tr>
+       
+        @{
+            float s = 0;
+            Session["count"] = 0;
+        }
+
+        @foreach (Item item in (List<Item>)Session["cart"])
+        {
+            s += item.Pr.price * item.Qty;
+            Session["count"] = Convert.ToInt32(Session["count"]) + item.Qty;
+            <tr>
+                <td>@Html.ActionLink("Delete", "DeleteOrder", "Public", new { id = @item.Pr.id }, null)</td>
+                <td>@item.Pr.id</td>
+                <td>@item.Pr.name</td>
+                <td>@item.Pr.price</td>
+                <td><input type="text" name="Qty" value="@item.Qty" /><input type="submit" name="submit" value="Update" /></td>
+                <td>@(item.Pr.price * item.Qty)</td>
+
+            </tr>
+
+
+        }
+        <tr>
+            <td align="right" colspan="5"> Sub-total:</td>
+            <td>@s</td>
+        </tr>
+       <caption> You Have:@Session["count"] Iteam </caption>
+    </table>
+
+}
+@Html.ActionLink("Continue Shopping", "Product", "Public")|;
+@Html.ActionLink("Checkout", "Checkout", "Public");
+@*<a href="javascript:void(0);" onclick="history.go(-1);">Continue Shopping</a>*@

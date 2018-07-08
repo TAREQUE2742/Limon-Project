@@ -1,0 +1,54 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+
+.product {
+    width: 260px;
+    height: 400px;
+    border: thin silver solid;
+    float: left;
+    margin: 15px;
+    padding: 2px;
+    overflow: hidden;
+    background-color: aliceblue;
+    font-size: 12px;
+}
+ .product a img {
+
+     width: 245px;
+     height: 200px;
+ }
+    .product h2 {
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .product span {
+        display: block;
+        padding: 3px;
+        text-align: center;
+    }
+    .product p {
+        display: block;
+        padding: 3px;
+        text-align: center;
+    }
+.imageMain {
+    height: 400px;
+    width: 80%;
+    margin-bottom: 10px;
+}
+.imageSub {
+    height: 150px;
+    width: 139px;
+    margin: 1px;
+}
+
+
+
+
+
+

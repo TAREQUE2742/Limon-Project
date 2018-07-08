@@ -1,0 +1,46 @@
+﻿@model IEnumerable<LimonSelling.Models.PaymentMethod>
+
+@{
+    ViewBag.Title = "Payment Method List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Payment Method List</h2>
+
+<p>
+    @Html.ActionLink("Create New Payment Method", "Create")
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.processor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.processor)
+        </td>
+        <td>
+            @Html.ActionLink("Update", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

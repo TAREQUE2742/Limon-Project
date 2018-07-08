@@ -1,0 +1,50 @@
+﻿@model IEnumerable<LimonSelling.Models.Product>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+
+@ViewBag.message
+<h2>New Product</h2>
+
+
+<div class="row">
+    <div class="col-md-12">
+        @foreach (var iteam in Model)
+        {
+            <div class="product">
+                <h2>@iteam.name,@iteam.code</h2>
+                <a href="../Public/ProductDetails?Product=@iteam.id">
+                    @if (iteam.ProductImages.Count > 0)
+                    {
+                        var v = iteam.ProductImages.First();
+                        @Html.Raw("<img src=\"../uploads/productimages/" + v.id + "_" + v.image1 + "\"title=\"" + iteam.ProductImages.Count + "Images\" />")
+                        ;
+
+                    }
+                    else
+                    {
+                        <img src="~/uploads/productimages/No image.jpg" />
+                    }
+                </a>
+                <div>
+                    <span>@iteam.Brand.name in @iteam.Category.name</span>
+                    <span>Price:@iteam.price</span>
+                </div>
+                <p>
+                    Description:@iteam.description<br />
+                    @*<span><a href="../Public/OrderNow?Category=@(ViewBag.category) &add=@iteam.id">Add to Cart</a></span>*@
+                    @Html.ActionLink("Add To cart", "OrderNow", "Public", new { id = iteam.id }, null)
+                    @Html.ActionLink("Add To Wishlist", "WishList", "Public", new { id = iteam.id }, null)
+                    <span>
+                        Comment:
+                        <a href="../Public/Comment/@iteam.id"></a>@iteam.ProductComments.Count
+                    </span>
+
+                    @*<span>Comments:<a href="../Public/Comment/@iteam.id">@iteam.productComment.count</a>,<a href="#">Like</a><a href=""title="">@iteam.productLike.count</a></span>*@
+                </p>
+
+            </div>
+        }
+    </div>
+</div>

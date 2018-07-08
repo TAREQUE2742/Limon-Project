@@ -1,0 +1,66 @@
+﻿@model LimonSelling.Models.ProductStock
+
+@{
+    ViewBag.Title = "Delete Product Stock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Product Stock</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Produc tStock</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.inQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.outQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.outQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateTime)
+        </dd>
+
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Login error";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+
+
+
+<div class="bs-example">
+    <div class="alert alert-danger">
+
+        <h2><strong>Wrong Password or Wrong Email</strong> try again</h2>
+        <span class="alert-success"><a href="@Url.Action("Login", "MyAccount")" class="close" data-dismiss="alert"> &times;</a></span>
+    </div>
+</div>

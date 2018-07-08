@@ -1,0 +1,1172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Innovation002Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="200" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cartId" Type="varchar" MaxLength="200" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+          <Property Name="createDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="200" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="categoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="countryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="orderId" />
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="orderId" Type="int" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="rate" Type="float" />
+          <Property Name="remarks" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateTime" Type="date" />
+          <Property Name="number" Type="varchar" MaxLength="20" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="deliveryCharge" Type="float" />
+          <Property Name="otherCharge" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="paymentMethodId" Type="int" />
+          <Property Name="deliveryAddress" Type="varchar" MaxLength="200" />
+          <Property Name="cityId" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PaymentMethod">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="200" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="processor" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="tag" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+          <Property Name="brandId" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="weight" Type="float" Nullable="false" />
+          <Property Name="discount" Type="int" Nullable="false" />
+          <Property Name="lastUpdate" Type="date" />
+        </EntityType>
+        <EntityType Name="ProductComment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="dateTime" Type="date" />
+          <Property Name="comment" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ProductImage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="image1" Type="varchar" MaxLength="200" />
+          <Property Name="title" Type="varchar" MaxLength="200" />
+          <Property Name="createDate" Type="date" />
+        </EntityType>
+        <EntityType Name="ProductStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="inQuantity" Type="int" Nullable="false" />
+          <Property Name="outQuantity" Type="int" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="200" />
+          <Property Name="dateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contact" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="genderId" Type="int" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="100" />
+          <Property Name="address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="cityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wishlist">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="dateTime" Type="date" />
+        </EntityType>
+        <Association Name="FK__Cart__productId__625A9A57">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Category__catego__30F848ED">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__City__countryId__1CBC4616">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="countryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__produ__31B762FC">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__remak__30C33EC3">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__cityId__2CF2ADDF">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="cityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__paymentM__2BFE89A6">
+          <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethod">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="paymentMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__userId__2B0A656D">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__brandId__37A5467C">
+          <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="brandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__categor__36B12243">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductCo__produ__395884C4">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductComment" Type="Self.ProductComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductComment">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductCo__userI__3864608B">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ProductComment" Type="Self.ProductComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductComment">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductIm__produ__49C3F6B7">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductImage">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductSt__produ__3D2915A8">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductStock" Type="Self.ProductStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductStock">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__cityId__2180FB33">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="cityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__genderId__22751F6C">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="genderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__wishlist__produc__3587F3E0">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="wishlist" Type="Self.wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="wishlist">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__wishlist__userId__3493CFA7">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="wishlist" Type="Self.wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="wishlist">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Innovation002ModelStoreContainer">
+          <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductComment" EntityType="Self.ProductComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductStock" EntityType="Self.ProductStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wishlist" EntityType="Self.wishlist" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cart__productId__625A9A57" Association="Self.FK__Cart__productId__625A9A57">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Category__catego__30F848ED" Association="Self.FK__Category__catego__30F848ED">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category1" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__City__countryId__1CBC4616" Association="Self.FK__City__countryId__1CBC4616">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__produ__31B762FC" Association="Self.FK__OrderDeta__produ__31B762FC">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__remak__30C33EC3" Association="Self.FK__OrderDeta__remak__30C33EC3">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__cityId__2CF2ADDF" Association="Self.FK__Orders__cityId__2CF2ADDF">
+            <End Role="City" EntitySet="City" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__paymentM__2BFE89A6" Association="Self.FK__Orders__paymentM__2BFE89A6">
+            <End Role="PaymentMethod" EntitySet="PaymentMethod" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__userId__2B0A656D" Association="Self.FK__Orders__userId__2B0A656D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__brandId__37A5467C" Association="Self.FK__Product__brandId__37A5467C">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__categor__36B12243" Association="Self.FK__Product__categor__36B12243">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductCo__produ__395884C4" Association="Self.FK__ProductCo__produ__395884C4">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductComment" EntitySet="ProductComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductCo__userI__3864608B" Association="Self.FK__ProductCo__userI__3864608B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProductComment" EntitySet="ProductComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductIm__produ__49C3F6B7" Association="Self.FK__ProductIm__produ__49C3F6B7">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductImage" EntitySet="ProductImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductSt__produ__3D2915A8" Association="Self.FK__ProductSt__produ__3D2915A8">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductStock" EntitySet="ProductStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__cityId__2180FB33" Association="Self.FK__Users__cityId__2180FB33">
+            <End Role="City" EntitySet="City" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__genderId__22751F6C" Association="Self.FK__Users__genderId__22751F6C">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__wishlist__produc__3587F3E0" Association="Self.FK__wishlist__produc__3587F3E0">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="wishlist" EntitySet="wishlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK__wishlist__userId__3493CFA7" Association="Self.FK__wishlist__userId__3493CFA7">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="wishlist" EntitySet="wishlist" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Innovation002Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__brandId__37A5467C" FromRole="Brands" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="categoryId" Type="Int32" />
+          <NavigationProperty Name="Category1" Relationship="Self.FK__Category__catego__30F848ED" FromRole="Category" ToRole="Category1" />
+          <NavigationProperty Name="Category2" Relationship="Self.FK__Category__catego__30F848ED" FromRole="Category1" ToRole="Category" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__categor__36B12243" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tag" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="brandId" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="weight" Type="Double" Nullable="false" />
+          <Property Name="discount" Type="Int32" Nullable="false" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK__Product__brandId__37A5467C" FromRole="Product" ToRole="Brands" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__categor__36B12243" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="ProductImages" Relationship="Self.FK__ProductIm__produ__49C3F6B7" FromRole="Product" ToRole="ProductImage" />
+          <NavigationProperty Name="ProductComments" Relationship="Innovation002Model.FK__ProductCo__produ__395884C4" FromRole="Product" ToRole="ProductComment" />
+          <NavigationProperty Name="ProductStocks" Relationship="Innovation002Model.FK__ProductSt__produ__3D2915A8" FromRole="Product" ToRole="ProductStock" />
+          <NavigationProperty Name="OrderDetails" Relationship="Innovation002Model.FK__OrderDeta__produ__31B762FC" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="wishlists" Relationship="Innovation002Model.FK__wishlist__produc__3587F3E0" FromRole="Product" ToRole="wishlist" />
+          <NavigationProperty Name="Carts" Relationship="Innovation002Model.FK__Cart__productId__625A9A57" FromRole="Product" ToRole="Cart" />
+        </EntityType>
+        <EntityType Name="ProductImage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="image1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="createDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__ProductIm__produ__49C3F6B7" FromRole="ProductImage" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK__Product__brandId__37A5467C">
+          <End Role="Brands" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="brandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Category__catego__30F848ED">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__categor__36B12243">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductIm__produ__49C3F6B7">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductImage">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Innovation002Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Brands" EntityType="Self.Brand" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductImages" EntityType="Self.ProductImage" />
+          <AssociationSet Name="FK__Product__brandId__37A5467C" Association="Self.FK__Product__brandId__37A5467C">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Category__catego__30F848ED" Association="Self.FK__Category__catego__30F848ED">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category1" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__categor__36B12243" Association="Self.FK__Product__categor__36B12243">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductIm__produ__49C3F6B7" Association="Self.FK__ProductIm__produ__49C3F6B7">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductImage" EntitySet="ProductImages" />
+          </AssociationSet>
+          <EntitySet Name="Cities" EntityType="Innovation002Model.City" />
+          <EntitySet Name="Countries" EntityType="Innovation002Model.Country" />
+          <EntitySet Name="Genders" EntityType="Innovation002Model.Gender" />
+          <EntitySet Name="Users" EntityType="Innovation002Model.User" />
+          <AssociationSet Name="FK__City__countryId__1CBC4616" Association="Innovation002Model.FK__City__countryId__1CBC4616">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__cityId__2180FB33" Association="Innovation002Model.FK__Users__cityId__2180FB33">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__genderId__22751F6C" Association="Innovation002Model.FK__Users__genderId__22751F6C">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="ProductComments" EntityType="Innovation002Model.ProductComment" />
+          <EntitySet Name="ProductStocks" EntityType="Innovation002Model.ProductStock" />
+          <AssociationSet Name="FK__ProductCo__produ__395884C4" Association="Innovation002Model.FK__ProductCo__produ__395884C4">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductComment" EntitySet="ProductComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductSt__produ__3D2915A8" Association="Innovation002Model.FK__ProductSt__produ__3D2915A8">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductStock" EntitySet="ProductStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductCo__userI__3864608B" Association="Innovation002Model.FK__ProductCo__userI__3864608B">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ProductComment" EntitySet="ProductComments" />
+          </AssociationSet>
+          <EntitySet Name="PaymentMethods" EntityType="Innovation002Model.PaymentMethod" />
+          <EntitySet Name="Orders" EntityType="Innovation002Model.Order" />
+          <AssociationSet Name="FK__Orders__cityId__2CF2ADDF" Association="Innovation002Model.FK__Orders__cityId__2CF2ADDF">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__paymentM__2BFE89A6" Association="Innovation002Model.FK__Orders__paymentM__2BFE89A6">
+            <End Role="PaymentMethod" EntitySet="PaymentMethods" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__userId__2B0A656D" Association="Innovation002Model.FK__Orders__userId__2B0A656D">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="OrderDetails" EntityType="Innovation002Model.OrderDetail" />
+          <AssociationSet Name="FK__OrderDeta__produ__31B762FC" Association="Innovation002Model.FK__OrderDeta__produ__31B762FC">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__remak__30C33EC3" Association="Innovation002Model.FK__OrderDeta__remak__30C33EC3">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <EntitySet Name="wishlists" EntityType="Innovation002Model.wishlist" />
+          <AssociationSet Name="FK__wishlist__produc__3587F3E0" Association="Innovation002Model.FK__wishlist__produc__3587F3E0">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="wishlist" EntitySet="wishlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__wishlist__userId__3493CFA7" Association="Innovation002Model.FK__wishlist__userId__3493CFA7">
+            <End Role="User" EntitySet="Users" />
+            <End Role="wishlist" EntitySet="wishlists" />
+          </AssociationSet>
+          <EntitySet Name="Carts" EntityType="Innovation002Model.Cart" />
+          <AssociationSet Name="FK__Cart__productId__625A9A57" Association="Innovation002Model.FK__Cart__productId__625A9A57">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="countryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="Innovation002Model.FK__City__countryId__1CBC4616" FromRole="City" ToRole="Country" />
+          <NavigationProperty Name="Users" Relationship="Innovation002Model.FK__Users__cityId__2180FB33" FromRole="City" ToRole="User" />
+          <NavigationProperty Name="Orders" Relationship="Innovation002Model.FK__Orders__cityId__2CF2ADDF" FromRole="City" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cities" Relationship="Innovation002Model.FK__City__countryId__1CBC4616" FromRole="Country" ToRole="City" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="Innovation002Model.FK__Users__genderId__22751F6C" FromRole="Gender" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="genderId" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Innovation002Model.FK__Users__cityId__2180FB33" FromRole="User" ToRole="City" />
+          <NavigationProperty Name="Gender" Relationship="Innovation002Model.FK__Users__genderId__22751F6C" FromRole="User" ToRole="Gender" />
+          <NavigationProperty Name="ProductComments" Relationship="Innovation002Model.FK__ProductCo__userI__3864608B" FromRole="User" ToRole="ProductComment" />
+          <NavigationProperty Name="Orders" Relationship="Innovation002Model.FK__Orders__userId__2B0A656D" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="wishlists" Relationship="Innovation002Model.FK__wishlist__userId__3493CFA7" FromRole="User" ToRole="wishlist" />
+        </EntityType>
+        <Association Name="FK__City__countryId__1CBC4616">
+          <End Type="Innovation002Model.Country" Role="Country" Multiplicity="1" />
+          <End Type="Innovation002Model.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="countryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__cityId__2180FB33">
+          <End Type="Innovation002Model.City" Role="City" Multiplicity="1" />
+          <End Type="Innovation002Model.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="cityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__genderId__22751F6C">
+          <End Type="Innovation002Model.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="Innovation002Model.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="genderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductComment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="dateTime" Type="DateTime" Precision="0" />
+          <Property Name="comment" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Innovation002Model.FK__ProductCo__produ__395884C4" FromRole="ProductComment" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Innovation002Model.FK__ProductCo__userI__3864608B" FromRole="ProductComment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ProductStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="inQuantity" Type="Int32" Nullable="false" />
+          <Property Name="outQuantity" Type="Int32" Nullable="false" />
+          <Property Name="remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="dateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="Innovation002Model.FK__ProductSt__produ__3D2915A8" FromRole="ProductStock" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK__ProductCo__produ__395884C4">
+          <End Type="Innovation002Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="Innovation002Model.ProductComment" Role="ProductComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductComment">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductSt__produ__3D2915A8">
+          <End Type="Innovation002Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="Innovation002Model.ProductStock" Role="ProductStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductStock">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductCo__userI__3864608B">
+          <End Type="Innovation002Model.User" Role="User" Multiplicity="1" />
+          <End Type="Innovation002Model.ProductComment" Role="ProductComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductComment">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PaymentMethod">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="processor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="Innovation002Model.FK__Orders__paymentM__2BFE89A6" FromRole="PaymentMethod" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateTime" Type="DateTime" Precision="0" />
+          <Property Name="number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="deliveryCharge" Type="Double" />
+          <Property Name="otherCharge" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="paymentMethodId" Type="Int32" />
+          <Property Name="deliveryAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cityId" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="City" Relationship="Innovation002Model.FK__Orders__cityId__2CF2ADDF" FromRole="Order" ToRole="City" />
+          <NavigationProperty Name="PaymentMethod" Relationship="Innovation002Model.FK__Orders__paymentM__2BFE89A6" FromRole="Order" ToRole="PaymentMethod" />
+          <NavigationProperty Name="User" Relationship="Innovation002Model.FK__Orders__userId__2B0A656D" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="OrderDetails" Relationship="Innovation002Model.FK__OrderDeta__remak__30C33EC3" FromRole="Order" ToRole="OrderDetail" />
+        </EntityType>
+        <Association Name="FK__Orders__cityId__2CF2ADDF">
+          <End Type="Innovation002Model.City" Role="City" Multiplicity="1" />
+          <End Type="Innovation002Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="cityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__paymentM__2BFE89A6">
+          <End Type="Innovation002Model.PaymentMethod" Role="PaymentMethod" Multiplicity="0..1" />
+          <End Type="Innovation002Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethod">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="paymentMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__userId__2B0A656D">
+          <End Type="Innovation002Model.User" Role="User" Multiplicity="1" />
+          <End Type="Innovation002Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="orderId" />
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="orderId" Type="Int32" Nullable="false" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="rate" Type="Double" />
+          <Property Name="remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Innovation002Model.FK__OrderDeta__produ__31B762FC" FromRole="OrderDetail" ToRole="Product" />
+          <NavigationProperty Name="Order" Relationship="Innovation002Model.FK__OrderDeta__remak__30C33EC3" FromRole="OrderDetail" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK__OrderDeta__produ__31B762FC">
+          <End Type="Innovation002Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="Innovation002Model.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__remak__30C33EC3">
+          <End Type="Innovation002Model.Order" Role="Order" Multiplicity="1" />
+          <End Type="Innovation002Model.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="wishlist">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="dateTime" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Product" Relationship="Innovation002Model.FK__wishlist__produc__3587F3E0" FromRole="wishlist" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Innovation002Model.FK__wishlist__userId__3493CFA7" FromRole="wishlist" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__wishlist__produc__3587F3E0">
+          <End Type="Innovation002Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="Innovation002Model.wishlist" Role="wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="wishlist">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__wishlist__userId__3493CFA7">
+          <End Type="Innovation002Model.User" Role="User" Multiplicity="1" />
+          <End Type="Innovation002Model.wishlist" Role="wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="wishlist">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cartId" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Product" Relationship="Innovation002Model.FK__Cart__productId__625A9A57" FromRole="Cart" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK__Cart__productId__625A9A57">
+          <End Type="Innovation002Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="Innovation002Model.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Innovation002ModelStoreContainer" CdmEntityContainer="Innovation002Entities">
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="Innovation002Model.Brand">
+              <MappingFragment StoreEntitySet="Brands">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="Innovation002Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="Innovation002Model.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="tag" ColumnName="tag" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="brandId" ColumnName="brandId" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductImages">
+            <EntityTypeMapping TypeName="Innovation002Model.ProductImage">
+              <MappingFragment StoreEntitySet="ProductImage">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="image1" ColumnName="image1" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="Innovation002Model.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="countryId" ColumnName="countryId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="Innovation002Model.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="Innovation002Model.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Innovation002Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="cityId" ColumnName="cityId" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="genderId" ColumnName="genderId" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductComments">
+            <EntityTypeMapping TypeName="Innovation002Model.ProductComment">
+              <MappingFragment StoreEntitySet="ProductComment">
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductStocks">
+            <EntityTypeMapping TypeName="Innovation002Model.ProductStock">
+              <MappingFragment StoreEntitySet="ProductStock">
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="outQuantity" ColumnName="outQuantity" />
+                <ScalarProperty Name="inQuantity" ColumnName="inQuantity" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentMethods">
+            <EntityTypeMapping TypeName="Innovation002Model.PaymentMethod">
+              <MappingFragment StoreEntitySet="PaymentMethod">
+                <ScalarProperty Name="processor" ColumnName="processor" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Innovation002Model.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="cityId" ColumnName="cityId" />
+                <ScalarProperty Name="deliveryAddress" ColumnName="deliveryAddress" />
+                <ScalarProperty Name="paymentMethodId" ColumnName="paymentMethodId" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="otherCharge" ColumnName="otherCharge" />
+                <ScalarProperty Name="deliveryCharge" ColumnName="deliveryCharge" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="Innovation002Model.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wishlists">
+            <EntityTypeMapping TypeName="Innovation002Model.wishlist">
+              <MappingFragment StoreEntitySet="wishlist">
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="Innovation002Model.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="cartId" ColumnName="cartId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

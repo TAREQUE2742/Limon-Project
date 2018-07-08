@@ -1,0 +1,154 @@
+﻿@model LimonSelling.Models.Order
+
+@{
+    ViewBag.Title = "Invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Make Invoice</h2>
+<div id="div_print">
+    <div class="row">
+        <div class="col-lg-4">
+            <dl class="dl-horizontal">
+                <dt>
+                    Order Number:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.id)
+                </dd>
+                <dt>
+                    Customer Name:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.name)
+                </dd>
+                <dt>
+                    Mobile Number:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.number)
+                </dd>
+                <dt>
+                    Delivery Charge:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.deliveryCharge)
+                </dd>
+                <dt>
+                    Other Charge:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.otherCharge)
+                </dd>
+                <dt>
+                    Total:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.total) Taka Only
+                </dd>
+
+                <dt>
+                    Payment:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PaymentMethod.name)
+                </dd>
+
+                <dt>
+                    Delivery Address:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.deliveryAddress)
+                </dd>
+                <dt>
+                    City:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City.name)
+                </dd>
+                <dt>
+                    Status:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.status)
+                </dd>
+
+                <dt>
+                    Order Date:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.dateTime)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-lg-8">
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                   
+
+
+                </tr>
+
+                @foreach (var item in Model.OrderDetails)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.rate)
+                        </td>
+                        
+
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+    <input name="b_print" type="button" class="ipt" onClick="printdiv('div_print');" value=" Print ">
+</div>
+
+<script>
+    function printdiv(printpage) {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var newstr = document.all.item(printpage).innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr + newstr + footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
+</script>
+
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.id }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

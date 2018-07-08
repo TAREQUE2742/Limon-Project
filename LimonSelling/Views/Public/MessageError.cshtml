@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Order Now error";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+
+<div class="bs-example">
+    <div class="alert alert-warning">
+        <a href="@Url.Action("Product", "Public")"  class="close" data-dismiss="alert">&times;</a>
+        <strong>Warning!</strong> There was a problem with your network connection or Internal Server.
+    </div>
+</div>
+

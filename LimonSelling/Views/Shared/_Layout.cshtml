@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+   
+</head>
+<body>
+    <div class="navbar navbar-transparent navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Admin Panel", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("Admin", "Index", "Admin")</li>*@
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Product Management <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Brand", "Index", "Brand")</li>
+                            <li>@Html.ActionLink("Category", "Index", "Category")</li>
+                            <li>@Html.ActionLink("Product", "Index", "Product")</li>
+                            <li>@Html.ActionLink("Product Image", "Index", "ProductImage")</li>
+                            <li>@Html.ActionLink("Stock", "Index", "ProductStock")</li>
+                        </ul>
+                    </li>
+                    @*<li>@Html.ActionLink("Brand", "Index", "Brand")</li>
+        <li>@Html.ActionLink("Category", "Index", "Category")</li>
+        <li>@Html.ActionLink("Product", "Index", "Product")</li>
+        <li>@Html.ActionLink("Product Image", "Index", "ProductImage")</li>
+        <li>@Html.ActionLink("Stock", "Index", "ProductStock")</li>*@
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Location Management<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Country", "Index", "Country")</li>
+                            <li>@Html.ActionLink("City", "Index", "City")</li>
+                            <li>@Html.ActionLink("Payment Method", "Index", "PaymentMethod")</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Order Management<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Order", "Index", "Order")</li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Customer Review", "Index", "ProductComment")</li>
+                            <li>@Html.ActionLink("Customer ManageMent", "Index", "User")</li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+                @Html.Partial("_MyLoginPartial")
+                
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="navbar navbar-transparent navbar-fixed-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" style="text-align:center">
+                        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                    </div>
+                </div>
+            </div>
+                    </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

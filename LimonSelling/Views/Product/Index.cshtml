@@ -1,0 +1,114 @@
+﻿@model IEnumerable<LimonSelling.Models.Product>
+
+@{
+    ViewBag.Title = "Product List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="container search">
+    <form method="post" action="">
+        @*<label class=""> Product Search</label>*@
+        @Html.DropDownList("brand", new SelectList(new LimonSelling.Models.Innovation002Entities().Brands, "id", "name", ViewBag.brand), "Select", htmlAttributes: new { @class = "control-label col-md-2" })
+        <input type="submit" value="Search By Brand" class="btn btn-default" />
+    </form>
+</div>
+<table class="table table-hover">
+    <tr>
+        <th>
+            <b> @Html.DisplayNameFor(model => model.name) </b><br>
+            @Html.DisplayNameFor(model => model.code) <br>
+            <i>@Html.DisplayNameFor(model => model.tag)</i>
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.discount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastUpdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.name)
+        </th>
+        <th>
+            Image
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <b> @Html.DisplayFor(modelItem => item.name) </b><br>
+                @Html.DisplayFor(modelItem => item.code) <br>
+                <i> @Html.DisplayFor(modelItem => item.tag) </i>
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastUpdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.name)
+            </td>
+            <td>
+                @{if (item.ProductImages.Count > 0)
+                    {
+                        var v = item.ProductImages.First();
+                        @Html.Raw("<a href=\"../ProductImage?product=" + item.id + "\"><img src=\"../uploads/productimages/" + v.id + "_" + v.image1 + "\"height=\"100\" title=\"Total: " + item.ProductImages.Count + "Images\" /></a>")
+
+                    }
+                    else
+                    {
+                        @Html.Raw("<img src=\"../uploads/productimages/No image.jpg\" height=\"100\" />")
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Update", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="pagination">
+    @{
+        for (int i = 1; i <= ViewBag.pageNumber; i++)
+        {
+            @Html.Raw("<a href=\"../Product?Page=" + i + "\">Page " + i + " </a>");
+        }
+    }
+</div>

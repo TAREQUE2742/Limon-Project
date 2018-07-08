@@ -1,0 +1,98 @@
+﻿@model IEnumerable<LimonSelling.Models.Product>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+
+
+@ViewBag.message
+<h2 class="container">Product</h2>
+<div class="container search" style="text-align:right">
+    <form method="post" action="">
+        @*<label class=""> Product Search</label>*@
+        <input type="text" name="search" id="search" value="@ViewBag.search">
+        @*@Html.DropDownList("brand", new SelectList(new LimonSelling.Models.Innovation002Entities().Brands, "id", "name", ViewBag.brand), "Select", htmlAttributes: new { @class = "control-label col-md-3" })*@
+        <input type="submit" value="Search Product" class="btn btn-default" />
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var iteam in Model)
+        {
+            <div class="col-md-3">
+                <div class="product">
+                    <h2>@iteam.name,@iteam.code</h2>
+                    <a href="../Public/ProductDetails?Product=@iteam.id">
+                        @if (iteam.ProductImages.Count > 0)
+                        {
+                            var v = iteam.ProductImages.First();
+                            @Html.Raw("<img src=\"../uploads/productimages/" + v.id + "_" + v.image1 + "\"title=\"" + iteam.ProductImages.Count + "Images\" />");
+                        }
+                        else
+                        {
+                            <img src="~/uploads/productimages/No image.jpg" />
+                        }
+                    </a>
+                    <div>
+                        <span>@iteam.Brand.name in @iteam.Category.name</span>
+                        <span>Price:@iteam.price</span>
+
+                    </div>
+                    <p>
+                        Description:@iteam.description<br />
+                        @if (iteam.discount > 10)
+                        {
+                            <span class="alert-success">Stock:Available</span>
+                            @Html.ActionLink("Add To cart", "OrderNow", "Public", new { id = iteam.id }, null)
+                            
+                            @Html.ActionLink("Add To Wishlist", "WishList", "Public", new { id = iteam.id }, null)
+
+                            <br>
+                            <span class="alert-success">
+                                Comment:
+                                <a href="../Public/Comment/@iteam.id"></a>@iteam.ProductComments.Count
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="alert-danger">Stock:Out of Stock</span>
+
+                            <br>
+                            <span class="alert-success">
+                                Comment:
+                                <a href="../Public/Comment/@iteam.id"></a>@iteam.ProductComments.Count
+                            </span>
+                        }
+                        <br>
+
+                    </p>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination pagination-lg">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        @{
+            for (int i = 1; i <= ViewBag.pageNumber; i++)
+            {
+                <li class="page-item">@Html.Raw("<a href=\"../Public/Product?Page=" + i + "\">" + i + " </a>")</li>
+            }
+        }
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>
