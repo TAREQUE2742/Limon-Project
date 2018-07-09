@@ -42,7 +42,7 @@ namespace LimonSelling.Controllers
             }
 
             //pagenumber
-            int numberofiteam = 12;
+            int numberofiteam = 8;
             int skip = (page - 1) * numberofiteam;
             product = product.OrderBy(b => b.name).Skip(skip).Take(numberofiteam).ToList();
             int total = db.Products.Count();
@@ -68,6 +68,11 @@ namespace LimonSelling.Controllers
             return View(cat);
         }
         // GET: Public
+
+        
+
+
+
         public ActionResult Product(int brand=0,int category=0,int add=0,string search="",int page=1)
         {
             
@@ -90,7 +95,7 @@ namespace LimonSelling.Controllers
             }
 
             //pagenumber
-            int numberofiteam = 12;
+            int numberofiteam = 8;
             int skip = (page - 1) * numberofiteam;
             product = product.OrderBy(b => b.name).Skip(skip).Take(numberofiteam).ToList();
             int total = db.Products.Count();

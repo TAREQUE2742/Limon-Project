@@ -12,8 +12,9 @@
     margin: 15px;
     padding: 2px;
     overflow: hidden;
-    background-color: aliceblue;
+    background-color: green;
     font-size: 12px;
+    color:black;
 }
  .product a img {
 

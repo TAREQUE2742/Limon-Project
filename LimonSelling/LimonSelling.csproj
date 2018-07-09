@@ -207,6 +207,7 @@
     <Compile Include="Controllers\ProductImageController.cs" />
     <Compile Include="Controllers\ProductStockController.cs" />
     <Compile Include="Controllers\PublicController.cs" />
+    <Compile Include="Controllers\SfaController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -480,6 +481,22 @@
     <Content Include="Views\MyAccount\MasterLogout.cshtml" />
     <Content Include="Views\MyAccount\MasterLogin.cshtml" />
     <Content Include="Views\Product\UpdateSuccessfull.cshtml" />
+    <Content Include="Views\Shared\_SfaLayout.cshtml" />
+    <Content Include="Views\Sfa\Index.cshtml" />
+    <Content Include="Views\Sfa\KrishiAnchal.cshtml" />
+    <Content Include="Views\Sfa\Mati.cshtml" />
+    <Content Include="Views\Sfa\Language.cshtml" />
+    <Content Include="Views\Sfa\EmasherKrishi.cshtml" />
+    <Content Include="Views\Sfa\KrishiWeather.cshtml" />
+    <Content Include="Views\Sfa\BishesPoramorsho.cshtml" />
+    <Content Include="Views\Sfa\SamprotikUdvabon.cshtml" />
+    <Content Include="Views\Sfa\FosholerUtpadon.cshtml" />
+    <Content Include="Views\Sfa\KrishiVittikVideo.cshtml" />
+    <Content Include="Views\Sfa\KrishiVittikTotthoUpatto.cshtml" />
+    <Content Include="Views\Sfa\KhatoNarikel.cshtml" />
+    <Content Include="Views\Sfa\UnnotoPat.cshtml" />
+    <Content Include="Views\Sfa\VejalSharChenarUpay.cshtml" />
+    <Content Include="Views\Sfa\IdurDomon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

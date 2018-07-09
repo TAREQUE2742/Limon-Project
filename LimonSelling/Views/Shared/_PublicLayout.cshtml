@@ -6,14 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Ecommerce Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/slider/scripts")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/public.css" rel="stylesheet" />
     <link href="~/Content/publicMenu.css" rel="stylesheet" />
-    
-    
+    <link rel="stylesheet" type="text/css" href="slider/scripts/style.css" />
+    <script type="text/javascript" src="slider/scripts/jquery.js"></script>
+
+   
+
+
 </head>
 <body>
-    <div class="navbar navbar-transparent navbar-fixed-top" style="background-color:powderblue;">
+    <div class="navbar navbar-transparent navbar-fixed-top" style="background-color:green;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,14 +26,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("IES System", "Product", "Public", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("SFA ", "Index", "Sfa", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul id="" class="nav navbar-nav">
 
-                    <li>@Html.ActionLink("Home", "Product", "Public")</li>
-                    <li>@Html.ActionLink("New Arrival", "NewArrival", "Public")</li>
-                    <li>@Html.ActionLink("Product", "Product", "Public")</li>
+                    <li style="color:black;">@Html.ActionLink("Home", "Index", "Sfa")</li>
+                    <li>@Html.ActionLink("কৃষি অঞ্চল", "KrishiAnchal", "Sfa")</li>
+                    <li>@Html.ActionLink("মাটি", "Mati", "Sfa")</li>
+                    <li>@Html.ActionLink("English", "Language", "Sfa")</li>
+
 
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brand<span class="caret"></span></a>
@@ -47,21 +54,29 @@
                     <li>@Html.ActionLink("About", "About", "Public")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Public")</li>
                     <li class="active">
-                        <a href="@Url.Action("MyWishList", "Public")" class="btn btn-info">
+                        <a href="@Url.Action("MyWishList", "Public")" class="btn btn-info" style="color:black">
                             <span class="glyphicon glyphicon-heart" style="color:green"></span>WishList <span class="badge">@Session["Wcount"]</span>
                         </a>
                     </li>
 
                     <li class="active">
-                        <a href="@Url.Action("EmptyOrder", "Public")" class="btn btn-info">
-                            <span class="glyphicon glyphicon-shopping-cart" style="color:green"></span>Cart <span class="badge">@Session["count"]</span>
+                        <a href="@Url.Action("EmptyOrder", "Public")" class="btn btn-info" style="color:black">
+                            <span class="glyphicon glyphicon-shopping-cart" style="color:green"></span>দোকান <span class="badge">@Session["count"]</span>
                         </a>
                     </li>
                 </ul>
                 @Html.Partial("_MyLoginPartial")
+
+
+
             </div>
         </div>
     </div>
+
+   
+
+    <br />
+    <br />
 
 
     <div class="container">
@@ -70,7 +85,7 @@
         <div class="navbar navbar-transparent navbar-static-bottom">
             <div class="container">
                 <footer style="text-align:center">
-                    <p>&copy; @DateTime.Now.Year Design by - Limon for Dingi Technologies Ltd.</p>
+                    <p>&copy; @DateTime.Now.Year Smart Farming Assistant Application</p>
                 </footer>
             </div>
         </div>
@@ -82,3 +97,5 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
