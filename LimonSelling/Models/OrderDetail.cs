@@ -11,20 +11,13 @@ namespace LimonSelling.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class OrderDetail
     {
         public int orderId { get; set; }
         public int productId { get; set; }
-        [Required]
-        [Display(Name ="Quantity")]
         public int quantity { get; set; }
-        [Required]
-        [Display(Name ="Price")]
         public Nullable<double> rate { get; set; }
-        
-        [Display(Name ="Remarks")]
         public string remarks { get; set; }
     
         public virtual Product Product { get; set; }

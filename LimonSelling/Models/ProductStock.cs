@@ -11,25 +11,14 @@ namespace LimonSelling.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class ProductStock
     {
         public int id { get; set; }
-        [Required]
-        [Display(Name ="Product Name")]
         public int productId { get; set; }
-        
-        [Display(Name ="Available Quantity")]
         public int inQuantity { get; set; }
-        
-        [Display(Name = "Sell Quantity")]
         public int outQuantity { get; set; }
-        
-        [Display(Name = "Remarks")]
         public string remarks { get; set; }
-        
-        [Display(Name = "Date")]
         public Nullable<System.DateTime> dateTime { get; set; }
     
         public virtual Product Product { get; set; }

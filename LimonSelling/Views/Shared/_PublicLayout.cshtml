@@ -53,6 +53,7 @@
                     </li>
                     <li>@Html.ActionLink("About", "About", "Public")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Public")</li>
+                    <li>@Html.ActionLink("Recent Article", "Index", "Article")</li>
                     <li class="active">
                         <a href="@Url.Action("MyWishList", "Public")" class="btn btn-info" style="color:black">
                             <span class="glyphicon glyphicon-heart" style="color:green"></span>WishList <span class="badge">@Session["Wcount"]</span>

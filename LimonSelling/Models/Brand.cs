@@ -11,8 +11,7 @@ namespace LimonSelling.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Brand
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,13 +21,7 @@ namespace LimonSelling.Models
         }
     
         public int id { get; set; }
-        [Required]
-        [Display(Name ="Brand")]
-        [StringLength(30,MinimumLength =2)]
         public string name { get; set; }
-        [Required]
-        [Display(Name = "Description")]
-        [StringLength(30, MinimumLength = 3)]
         public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

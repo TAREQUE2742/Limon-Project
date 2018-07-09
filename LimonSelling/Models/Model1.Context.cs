@@ -40,5 +40,7 @@ namespace LimonSelling.Models
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<wishlist> wishlists { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<Article> Articles { get; set; }
+        public virtual DbSet<ArticleComment> ArticleComments { get; set; }
     }
 }

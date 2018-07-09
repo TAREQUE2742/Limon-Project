@@ -11,8 +11,7 @@ namespace LimonSelling.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class PaymentMethod
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,14 +21,8 @@ namespace LimonSelling.Models
         }
     
         public int id { get; set; }
-        [Required]
-        [Display(Name = "Payment Method")]
         public string name { get; set; }
-        [Required]
-        [Display(Name = "Description")]
         public string description { get; set; }
-        [Required]
-        [Display(Name = "Gateway")]
         public string processor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

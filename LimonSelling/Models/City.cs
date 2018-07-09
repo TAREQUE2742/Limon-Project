@@ -11,8 +11,7 @@ namespace LimonSelling.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class City
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,12 +22,7 @@ namespace LimonSelling.Models
         }
     
         public int id { get; set; }
-        [Required]
-        [Display(Name = "City")]
-        [StringLength(20,MinimumLength =3)]
         public string name { get; set; }
-        [Required]
-        [Display(Name ="Country")]
         public int countryId { get; set; }
     
         public virtual Country Country { get; set; }

@@ -11,22 +11,13 @@ namespace LimonSelling.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class ProductComment
     {
         public int id { get; set; }
-        [Required]
-        [Display(Name ="Product")]
         public int productId { get; set; }
-        [Required]
-        [Display(Name = "Customer Name")]
         public int userId { get; set; }
-        
-        [Display(Name = "Date")]
         public Nullable<System.DateTime> dateTime { get; set; }
-        [Required]
-        [Display(Name ="Review")]
         public string comment { get; set; }
     
         public virtual Product Product { get; set; }

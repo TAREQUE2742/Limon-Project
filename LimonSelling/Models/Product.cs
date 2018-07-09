@@ -11,8 +11,7 @@ namespace LimonSelling.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,46 +23,19 @@ namespace LimonSelling.Models
             this.OrderDetails = new HashSet<OrderDetail>();
             this.wishlists = new HashSet<wishlist>();
             this.Carts = new HashSet<Cart>();
+            this.Articles = new HashSet<Article>();
         }
     
         public int id { get; set; }
-        [Required]
-        [Display(Name ="Product Name")]
-        [StringLength(30,MinimumLength =3)]
         public string name { get; set; }
-
-        [Required]
-        [Display(Name = "Code")]
-        [StringLength(30, MinimumLength = 3)]
         public string code { get; set; }
-
-        [Required]
-        [Display(Name = "Tag")]
-        [StringLength(30, MinimumLength = 3)]
         public string tag { get; set; }
-        [Required]
-        [Display(Name = "Category")]
-        
         public int categoryId { get; set; }
-        [Required]
-        [Display(Name = "Brand")]
-        
         public int brandId { get; set; }
-        [Required]
-        [Display(Name = "Description")]
-        [StringLength(30, MinimumLength = 3)]
         public string description { get; set; }
-
-        [Required]
-        [Display(Name = "Price")]
         public int price { get; set; }
-        [Required]
-        [Display(Name = "Weight")]
         public double weight { get; set; }
-        [Required]
-        [Display(Name = "Discount")]
         public int discount { get; set; }
-        [Display(Name = "Date")]
         public Nullable<System.DateTime> lastUpdate { get; set; }
     
         public virtual Brand Brand { get; set; }
@@ -80,5 +52,7 @@ namespace LimonSelling.Models
         public virtual ICollection<wishlist> wishlists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Article> Articles { get; set; }
     }
 }

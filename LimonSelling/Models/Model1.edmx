@@ -5,6 +5,26 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Innovation002Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="body" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="publishDate" Type="datetime" />
+          <Property Name="productId" Type="int" />
+        </EntityType>
+        <EntityType Name="ArticleComment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="articleId" Type="int" />
+          <Property Name="userId" Type="int" />
+          <Property Name="comment" Type="varchar" MaxLength="300" />
+          <Property Name="commentDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Brands">
           <Key>
             <PropertyRef Name="id" />
@@ -70,7 +90,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="dateTime" Type="date" />
+          <Property Name="dateTime" Type="datetime" />
           <Property Name="number" Type="varchar" MaxLength="20" />
           <Property Name="userId" Type="int" Nullable="false" />
           <Property Name="deliveryCharge" Type="float" />
@@ -113,7 +133,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="productId" Type="int" Nullable="false" />
           <Property Name="userId" Type="int" Nullable="false" />
-          <Property Name="dateTime" Type="date" />
+          <Property Name="dateTime" Type="datetime" />
           <Property Name="comment" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="ProductImage">
@@ -124,7 +144,7 @@
           <Property Name="productId" Type="int" Nullable="false" />
           <Property Name="image1" Type="varchar" MaxLength="200" />
           <Property Name="title" Type="varchar" MaxLength="200" />
-          <Property Name="createDate" Type="date" />
+          <Property Name="createDate" Type="datetime" />
         </EntityType>
         <EntityType Name="ProductStock">
           <Key>
@@ -159,10 +179,48 @@
           </Key>
           <Property Name="userId" Type="int" Nullable="false" />
           <Property Name="productId" Type="int" Nullable="false" />
-          <Property Name="dateTime" Type="date" />
+          <Property Name="dateTime" Type="datetime" />
         </EntityType>
+        <Association Name="FK__Article__product__477199F1">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ArticleCo__artic__4A4E069C">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="ArticleComment" Type="Self.ArticleComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ArticleComment">
+              <PropertyRef Name="articleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ArticleCo__userI__4B422AD5">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ArticleComment" Type="Self.ArticleComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ArticleComment">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Cart__productId__625A9A57">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -250,7 +308,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Orders__userId__2B0A656D">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -262,7 +322,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Product__brandId__37A5467C">
-          <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
+          <End Role="Brands" Type="Self.Brands" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Brands">
@@ -286,7 +348,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ProductCo__produ__395884C4">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ProductComment" Type="Self.ProductComment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -322,7 +386,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ProductSt__produ__3D2915A8">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ProductStock" Type="Self.ProductStock" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -358,7 +424,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__wishlist__produc__3587F3E0">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="wishlist" Type="Self.wishlist" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -382,6 +450,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Innovation002ModelStoreContainer">
+          <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArticleComment" EntityType="Self.ArticleComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -397,6 +467,18 @@
           <EntitySet Name="ProductStock" EntityType="Self.ProductStock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wishlist" EntityType="Self.wishlist" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Article__product__477199F1" Association="Self.FK__Article__product__477199F1">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ArticleCo__artic__4A4E069C" Association="Self.FK__ArticleCo__artic__4A4E069C">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="ArticleComment" EntitySet="ArticleComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ArticleCo__userI__4B422AD5" Association="Self.FK__ArticleCo__userI__4B422AD5">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ArticleComment" EntitySet="ArticleComment" />
+          </AssociationSet>
           <AssociationSet Name="FK__Cart__productId__625A9A57" Association="Self.FK__Cart__productId__625A9A57">
             <End Role="Product" EntitySet="Product" />
             <End Role="Cart" EntitySet="Cart" />
@@ -518,6 +600,7 @@
           <NavigationProperty Name="OrderDetails" Relationship="Innovation002Model.FK__OrderDeta__produ__31B762FC" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="wishlists" Relationship="Innovation002Model.FK__wishlist__produc__3587F3E0" FromRole="Product" ToRole="wishlist" />
           <NavigationProperty Name="Carts" Relationship="Innovation002Model.FK__Cart__productId__625A9A57" FromRole="Product" ToRole="Cart" />
+          <NavigationProperty Name="Articles" Relationship="Innovation002Model.FK__Article__product__477199F1" FromRole="Product" ToRole="Article" />
         </EntityType>
         <EntityType Name="ProductImage">
           <Key>
@@ -527,7 +610,7 @@
           <Property Name="productId" Type="Int32" Nullable="false" />
           <Property Name="image1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="createDate" Type="DateTime" Precision="0" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Product" Relationship="Self.FK__ProductIm__produ__49C3F6B7" FromRole="ProductImage" ToRole="Product" />
         </EntityType>
         <Association Name="FK__Product__brandId__37A5467C">
@@ -666,6 +749,20 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="Cart" EntitySet="Carts" />
           </AssociationSet>
+          <EntitySet Name="Articles" EntityType="Innovation002Model.Article" />
+          <EntitySet Name="ArticleComments" EntityType="Innovation002Model.ArticleComment" />
+          <AssociationSet Name="FK__Article__product__477199F1" Association="Innovation002Model.FK__Article__product__477199F1">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Article" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ArticleCo__artic__4A4E069C" Association="Innovation002Model.FK__ArticleCo__artic__4A4E069C">
+            <End Role="Article" EntitySet="Articles" />
+            <End Role="ArticleComment" EntitySet="ArticleComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ArticleCo__userI__4B422AD5" Association="Innovation002Model.FK__ArticleCo__userI__4B422AD5">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ArticleComment" EntitySet="ArticleComments" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="City">
           <Key>
@@ -713,6 +810,7 @@
           <NavigationProperty Name="ProductComments" Relationship="Innovation002Model.FK__ProductCo__userI__3864608B" FromRole="User" ToRole="ProductComment" />
           <NavigationProperty Name="Orders" Relationship="Innovation002Model.FK__Orders__userId__2B0A656D" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="wishlists" Relationship="Innovation002Model.FK__wishlist__userId__3493CFA7" FromRole="User" ToRole="wishlist" />
+          <NavigationProperty Name="ArticleComments" Relationship="Innovation002Model.FK__ArticleCo__userI__4B422AD5" FromRole="User" ToRole="ArticleComment" />
         </EntityType>
         <Association Name="FK__City__countryId__1CBC4616">
           <End Type="Innovation002Model.Country" Role="Country" Multiplicity="1" />
@@ -757,7 +855,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="productId" Type="Int32" Nullable="false" />
           <Property Name="userId" Type="Int32" Nullable="false" />
-          <Property Name="dateTime" Type="DateTime" Precision="0" />
+          <Property Name="dateTime" Type="DateTime" Precision="3" />
           <Property Name="comment" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Product" Relationship="Innovation002Model.FK__ProductCo__produ__395884C4" FromRole="ProductComment" ToRole="Product" />
           <NavigationProperty Name="User" Relationship="Innovation002Model.FK__ProductCo__userI__3864608B" FromRole="ProductComment" ToRole="User" />
@@ -825,7 +923,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="dateTime" Type="DateTime" Precision="0" />
+          <Property Name="dateTime" Type="DateTime" Precision="3" />
           <Property Name="number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="userId" Type="Int32" Nullable="false" />
           <Property Name="deliveryCharge" Type="Double" />
@@ -920,7 +1018,7 @@
           </Key>
           <Property Name="userId" Type="Int32" Nullable="false" />
           <Property Name="productId" Type="Int32" Nullable="false" />
-          <Property Name="dateTime" Type="DateTime" Precision="0" />
+          <Property Name="dateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Product" Relationship="Innovation002Model.FK__wishlist__produc__3587F3E0" FromRole="wishlist" ToRole="Product" />
           <NavigationProperty Name="User" Relationship="Innovation002Model.FK__wishlist__userId__3493CFA7" FromRole="wishlist" ToRole="User" />
         </EntityType>
@@ -968,6 +1066,66 @@
             </Principal>
             <Dependent Role="Cart">
               <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="body" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="publishDate" Type="DateTime" Precision="3" />
+          <Property Name="productId" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Innovation002Model.FK__Article__product__477199F1" FromRole="Article" ToRole="Product" />
+          <NavigationProperty Name="ArticleComments" Relationship="Innovation002Model.FK__ArticleCo__artic__4A4E069C" FromRole="Article" ToRole="ArticleComment" />
+        </EntityType>
+        <EntityType Name="ArticleComment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="articleId" Type="Int32" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="comment" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="commentDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Article" Relationship="Innovation002Model.FK__ArticleCo__artic__4A4E069C" FromRole="ArticleComment" ToRole="Article" />
+          <NavigationProperty Name="User" Relationship="Innovation002Model.FK__ArticleCo__userI__4B422AD5" FromRole="ArticleComment" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Article__product__477199F1">
+          <End Type="Innovation002Model.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="Innovation002Model.Article" Role="Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ArticleCo__artic__4A4E069C">
+          <End Type="Innovation002Model.Article" Role="Article" Multiplicity="0..1" />
+          <End Type="Innovation002Model.ArticleComment" Role="ArticleComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ArticleComment">
+              <PropertyRef Name="articleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ArticleCo__userI__4B422AD5">
+          <End Type="Innovation002Model.User" Role="User" Multiplicity="0..1" />
+          <End Type="Innovation002Model.ArticleComment" Role="ArticleComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ArticleComment">
+              <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1142,6 +1300,28 @@
                 <ScalarProperty Name="count" ColumnName="count" />
                 <ScalarProperty Name="productId" ColumnName="productId" />
                 <ScalarProperty Name="cartId" ColumnName="cartId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="Innovation002Model.Article">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="publishDate" ColumnName="publishDate" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleComments">
+            <EntityTypeMapping TypeName="Innovation002Model.ArticleComment">
+              <MappingFragment StoreEntitySet="ArticleComment">
+                <ScalarProperty Name="commentDate" ColumnName="commentDate" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="articleId" ColumnName="articleId" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

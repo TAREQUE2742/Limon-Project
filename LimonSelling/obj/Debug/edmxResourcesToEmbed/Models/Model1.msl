@@ -170,5 +170,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Articles">
+      <EntityTypeMapping TypeName="Innovation002Model.Article">
+        <MappingFragment StoreEntitySet="Article">
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="publishDate" ColumnName="publishDate" />
+          <ScalarProperty Name="body" ColumnName="body" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleComments">
+      <EntityTypeMapping TypeName="Innovation002Model.ArticleComment">
+        <MappingFragment StoreEntitySet="ArticleComment">
+          <ScalarProperty Name="commentDate" ColumnName="commentDate" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="articleId" ColumnName="articleId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

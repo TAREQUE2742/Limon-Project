@@ -38,6 +38,11 @@
         <AssociationConnector Association="Innovation002Model.FK__wishlist__userId__3493CFA7" />
         <EntityTypeShape EntityType="Innovation002Model.Cart" Width="1.5" PointX="4.75" PointY="7" />
         <AssociationConnector Association="Innovation002Model.FK__Cart__productId__625A9A57" />
+        <EntityTypeShape EntityType="Innovation002Model.Article" Width="1.5" PointX="14.625" PointY="8.875" />
+        <EntityTypeShape EntityType="Innovation002Model.ArticleComment" Width="1.5" PointX="16.875" PointY="4.875" />
+        <AssociationConnector Association="Innovation002Model.FK__Article__product__477199F1" />
+        <AssociationConnector Association="Innovation002Model.FK__ArticleCo__artic__4A4E069C" />
+        <AssociationConnector Association="Innovation002Model.FK__ArticleCo__userI__4B422AD5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

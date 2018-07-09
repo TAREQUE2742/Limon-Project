@@ -11,25 +11,29 @@ namespace LimonSelling.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Category
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class Article
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public Article()
         {
-            this.Category1 = new HashSet<Category>();
-            this.Products = new HashSet<Product>();
+            this.ArticleComments = new HashSet<ArticleComment>();
         }
     
         public int id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public Nullable<int> categoryId { get; set; }
+        [Required]
+        [DisplayName("Headline")]
+        public string title { get; set; }
+        [Required]
+        [DataType(DataType.MultilineText)]
+        public string body { get; set; }
+        public Nullable<System.DateTime> publishDate { get; set; }
+        public Nullable<int> productId { get; set; }
     
+        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Category1 { get; set; }
-        public virtual Category Category2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<ArticleComment> ArticleComments { get; set; }
     }
 }

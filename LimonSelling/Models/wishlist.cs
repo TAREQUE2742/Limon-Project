@@ -11,18 +11,11 @@ namespace LimonSelling.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class wishlist
     {
-        [Required]
-        [Display(Name ="Customer Name")]
         public int userId { get; set; }
-        [Required]
-        [Display(Name = "Product Name")]
         public int productId { get; set; }
-        
-        [Display(Name = "Date")]
         public Nullable<System.DateTime> dateTime { get; set; }
     
         public virtual Product Product { get; set; }

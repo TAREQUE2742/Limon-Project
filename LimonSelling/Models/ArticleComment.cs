@@ -12,14 +12,15 @@ namespace LimonSelling.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductImage
+    public partial class ArticleComment
     {
         public int id { get; set; }
-        public int productId { get; set; }
-        public string image1 { get; set; }
-        public string title { get; set; }
-        public Nullable<System.DateTime> createDate { get; set; }
+        public Nullable<int> articleId { get; set; }
+        public Nullable<int> userId { get; set; }
+        public string comment { get; set; }
+        public Nullable<System.DateTime> commentDate { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Article Article { get; set; }
+        public virtual User User { get; set; }
     }
 }
