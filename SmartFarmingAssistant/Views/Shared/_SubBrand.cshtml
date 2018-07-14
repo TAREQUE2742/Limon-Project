@@ -1,0 +1,15 @@
+﻿@model IEnumerable<SmartFarmingAssistant.Models.Brand>
+
+<ul class="">
+    @foreach (var item in Model)
+    {
+
+
+        <li>
+            <a href="../Public/Product?Brand=@item.id">@item.name (@item.Products.Count)</a>
+
+            @*<p>@item.description</p>*@
+            
+        </li>
+    }
+</ul>

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SmartFarmingAssistant.Models.Brand>
+
+@{
+    ViewBag.Title = "Brand";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+
+<h2> Our Brands</h2>
+@Html.Partial("_SubBrand", Model)
+
+@*@foreach (var item in Model) {
+        <div class="">
+            <div>
+                @item.name
+            </div>
+            <div>
+                @item.description:
+                <p>
+                    Total<a href="../Public/Product?Brand=@item.id">@item.Products.Count</a> product
+                </p>
+            </div>
+
+        </div>
+    }*@
+
+

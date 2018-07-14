@@ -1,0 +1,195 @@
+﻿@model SmartFarmingAssistant.Models.Product
+
+@{
+    ViewBag.Title = "ProductDetails";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+
+<h2>ProductDetails</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        @{
+            int i = 0;
+            foreach (var item in Model.ProductImages)
+            {
+                if (i == 0)
+                {
+                    <img src="~/uploads/productimages/@(item.id.ToString() +"_"+item.image1)" class="imageMain" id="imageMain" />
+
+                }
+                    <div id="imgagesub" style="display:inline">
+                        <img src="~/uploads/productimages/@(item.id.ToString() +"_"+item.image1)" class="imageSub" id="@("image"+i.ToString())" onclick="changeImageOnClick(event)" />
+                    </div> 
+                i++;
+            }
+        }
+    </div>
+    <script type="text/javascript">
+
+        var images = document.getElementById("imgagesub").getElementsByTagName("img");
+
+        for (var i = 0; i < images.length; i++) {
+            images[i].onmouseover = function () {
+                this.style.cursor = 'hand';
+                this.style.borderColor = 'red';
+            }
+            images[i].onmouseout = function () {
+                this.style.cursor = 'pointer';
+                this.style.borderColor = 'grey';
+            }
+        }
+
+        function changeImageOnClick(event) {
+            event = event || window.event;
+            var targetElement = event.target || event.srcElement;
+
+            if (targetElement.tagName == "IMG") {
+                imageMain.src = targetElement.getAttribute("src");
+            }
+        }
+    </script>
+    <div class="col-md-6">
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
+
+            <dd>
+                <span>@Html.DisplayFor(model => model.name)</span>
+
+            </dd>
+            <dt>
+                Category Name:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Brand.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Brand.name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.code)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.code)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.tag)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.tag)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.price) Tk
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.weight)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.weight) gm
+            </dd>
+
+            @if (Model.discount < 10)
+            {
+
+            <dt>
+                Stock
+            </dt>
+
+            <dd>
+                <span class="alert-danger">Out of Stock</span>
+            </dd>
+            }
+            else
+            {
+                <dt>
+                Stock
+            </dt>
+
+            <dd>
+                <span class="alert-success">Available</span>
+            </dd>
+             @Html.ActionLink("Add To cart", "OrderNow", "Public", new { id = Model.id }, null)
+             @Html.ActionLink("Continue Shopping", "Product", "Public")
+            }
+
+
+        </dl>
+        @*<span><a href="../Public/ProductDetails?Product=@(ViewBag.product)&add=@Model.id">Add to Cart</a></span>*@
+        @*<a href="javascript:void(0);" onclick="history.go(-1);">Continue Shopping</a>*@
+        @*@Html.ActionLink("Add to Cart", "OrderNow", "Public", new { id = Model.id }, null)*@
+       
+    </div>
+
+</div>
+ 
+<hr/>
+@if (Session["id"].ToString() != "")
+{
+    <form method="post" action="">
+        @*<input type="hidden" name="userId" value="@Session["id"].ToString()"/>*@
+        <textarea name="comment" class="form-control">@ViewBag.comment</textarea>
+        <input type="submit" class="btn-primary" value="Comment"/>
+    </form>  
+    <div class="row">
+        @foreach(var item in Model.ProductComments)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <b>@Session["name"]</b><br/>
+                    @item.dateTime
+                </div>  
+                <div class="col-md-8">
+                    @item.comment
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<hr/>
+@if (Session["id"].ToString() == "")
+{
+    <div class="row">
+        @foreach(var item in Model.ProductComments)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <b>@item.User.name</b><br/>
+                    @item.dateTime
+                </div>  
+                <div class="col-md-8">
+                    @item.comment
+                </div>
+            </div>
+        }
+    </div>
+}  
+
+   

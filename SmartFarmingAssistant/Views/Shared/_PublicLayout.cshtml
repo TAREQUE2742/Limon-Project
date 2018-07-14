@@ -1,0 +1,96 @@
+﻿@using SmartFarmingAssistant.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Ecommerce Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/slider/scripts")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/public.css" rel="stylesheet" />
+    <link href="~/Content/publicMenu.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="slider/scripts/style.css" />
+    <script type="text/javascript" src="slider/scripts/jquery.js"></script>
+
+   
+
+
+</head>
+<body >
+    <div class="navbar navbar-transparent navbar-fixed-top" style="background-color:green;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div style="color:black">@Html.ActionLink("SFA ", "Index", "Sfa", new { area = "" }, new { @class = "navbar-brand", Style = "color:black"})</div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul id="" class="nav navbar-nav">
+                    <li>@Html.ActionLink("কৃষি অঞ্চল", "KrishiAnchal", "Sfa", new {Style = "color:black"})</li>
+                    <li>@Html.ActionLink("মাটি", "Mati", "Sfa", new { Style = "color:black" })</li>
+                    <li>@Html.ActionLink("English", "Language", "Sfa", new { Style = "color:black" })</li>
+
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brand<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @Html.Partial("_SubBrand", new SmartFarmingAssistant.Models.Innovation002Entities().Brands)
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="../Public/Product" class="nav-item dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.Partial("_Subcategory", new SmartFarmingAssistant.Models.Innovation002Entities().Categories.Where(c => c.categoryId == null))
+                            </li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("About", "About", "Public", new { Style = "color:black" })</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Public", new { Style = "color:black" })</li>
+                    <li>@Html.ActionLink("Recent Article", "ArticleShow", "Sfa", new { Style = "color:black" })</li>
+                    
+
+                    <li class="active">
+                        <a href="@Url.Action("EmptyOrder", "Public")" class="btn btn-info" style="color:black">
+                            <span class="glyphicon glyphicon-shopping-cart" style="color:green"></span>দোকান <span class="badge">@Session["count"]</span>
+                        </a>
+                    </li>
+                </ul>
+                @Html.Partial("_MyLoginPartial")
+
+
+
+            </div>
+        </div>
+    </div>
+
+   
+
+    <br />
+    <br />
+
+
+    <div class="container">
+        @RenderBody()
+        <hr />
+        <div class="navbar navbar-transparent navbar-static-bottom">
+            <div class="container">
+                <footer style="text-align:center">
+                    <p>&copy; @DateTime.Now.Year Smart Farming Assistant Application</p>
+                </footer>
+            </div>
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+

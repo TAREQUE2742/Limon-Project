@@ -1,0 +1,60 @@
+﻿@model SmartFarmingAssistant.Models.ProductStock
+
+@{
+    ViewBag.Title = "Product Stock Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product Stock Details</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.inQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.outQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.outQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateTime)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Update", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
