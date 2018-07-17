@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -76,9 +77,19 @@ namespace SmartFarmingAssistant.Controllers
             var articles = db.Articles;
             return View(articles.ToList());
         }
-        public ActionResult ArticleDetails()
+        public ActionResult ArticleDetails(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Article article = db.Articles.Find(id);
+            if (article == null)
+            {
+                return HttpNotFound();
+            }
+            return View(article);
+            
         }
 
 

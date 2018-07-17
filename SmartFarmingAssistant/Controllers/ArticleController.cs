@@ -121,6 +121,20 @@ namespace SmartFarmingAssistant.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult ArticleShow()
+        {
+            var articles = db.Articles.Include(a => a.Product);
+            return View(articles.ToList());
+        }
+        public ActionResult ArticleDetails()
+        {
+            return View();
+        }
+
+
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

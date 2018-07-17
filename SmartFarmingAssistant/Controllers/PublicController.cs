@@ -6,6 +6,7 @@ using System.Data.Entity.Core;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Web;
 using System.Web.DynamicData;
@@ -20,41 +21,41 @@ namespace SmartFarmingAssistant.Controllers
         
         private Innovation002Entities db = new Innovation002Entities();
         // GET: Public
-        public ActionResult Index(int brand = 0, int category = 0, int add = 0, string search = "", int page = 1)
-        {
+        //public ActionResult Index(int brand = 0, int category = 0, int add = 0, string search = "", int page = 1)
+        //{
 
-            var product = db.Products.ToList();
-            if (brand > 0)
-            {
-                product = product.Where(p => p.brandId == brand).ToList();
+        //    var product = db.Products.ToList();
+        //    if (brand > 0)
+        //    {
+        //        product = product.Where(p => p.brandId == brand).ToList();
 
-            }
+        //    }
 
-            if (category > 0)
-            {
-                product = product.Where(p => p.categoryId == category).ToList();
-            }
-            if (search != "")
-                product = product.Where(ps => ps.name.ToLower().Contains(search.ToLower()) || ps.Brand.name.ToLower().Contains(search.ToLower()) || ps.Category.name.ToLower().Contains(search.ToLower()) || ps.price.ToString().Contains(search.ToLower())).ToList();
-            if (search == "")
-            {
-                ViewBag.notfound = "No match product found";
-            }
+        //    if (category > 0)
+        //    {
+        //        product = product.Where(p => p.categoryId == category).ToList();
+        //    }
+        //    if (search != "")
+        //        product = product.Where(ps => ps.name.ToLower().Contains(search.ToLower()) || ps.Brand.name.ToLower().Contains(search.ToLower()) || ps.Category.name.ToLower().Contains(search.ToLower()) || ps.price.ToString().Contains(search.ToLower())).ToList();
+        //    if (search == "")
+        //    {
+        //        ViewBag.notfound = "No match product found";
+        //    }
 
-            //pagenumber
-            int numberofiteam = 8;
-            int skip = (page - 1) * numberofiteam;
-            product = product.OrderBy(b => b.name).Skip(skip).Take(numberofiteam).ToList();
-            int total = db.Products.Count();
-            int pageNumber = total / numberofiteam;
-            if (total % numberofiteam != 0)
-                pageNumber++;
-            ViewBag.pageNumber = pageNumber;
+        //    //pagenumber
+        //    int numberofiteam = 8;
+        //    int skip = (page - 1) * numberofiteam;
+        //    product = product.OrderBy(b => b.name).Skip(skip).Take(numberofiteam).ToList();
+        //    int total = db.Products.Count();
+        //    int pageNumber = total / numberofiteam;
+        //    if (total % numberofiteam != 0)
+        //        pageNumber++;
+        //    ViewBag.pageNumber = pageNumber;
 
-            ViewBag.category = category;
-            return View(product);
+        //    ViewBag.category = category;
+        //    return View(product);
 
-        }
+        //}
         // GET: Public
         public ActionResult Brand()
         {
@@ -426,12 +427,8 @@ namespace SmartFarmingAssistant.Controllers
             return View("MyWishList");
         }
         
-        //public PartialViewResult CartSummary(FormCollection fc)
-        //{
-        //    List<Item> cart = (List<Item>)Session["cart"];
-        //    ViewBag.count = Session["count"];
-        //    return PartialView("_cartPartial");
-        //}
+
+
         public ViewResult MessageError()
         {
             return View();
@@ -444,6 +441,97 @@ namespace SmartFarmingAssistant.Controllers
         {
             return View();
         }
-       
+
+
+
+        //sfa routiing problem solution
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult KrishiAnchal()
+        {
+            return View();
+        }
+        public ActionResult Mati()
+        {
+            return View();
+        }
+        public ActionResult Language()
+        {
+            return View();
+        }
+        public ActionResult EmasherKrishi()
+        {
+            return View();
+        }
+        public ActionResult KrishiWeather()
+        {
+            return View();
+        }
+        public ActionResult BishesPoramorsho()
+        {
+            return View();
+        }
+        public ActionResult SamprotikUdvabon()
+        {
+            return View();
+        }
+        public ActionResult FosholerUtpadon()
+        {
+            return View();
+        }
+        public ActionResult KrishiVittikVideo()
+        {
+            return View();
+        }
+        public ActionResult KrishiVittikTotthoUpatto()
+        {
+            return View();
+        }
+        public ActionResult KhatoNarikel()
+        {
+            return View();
+        }
+        public ActionResult UnnotoPat()
+        {
+            return View();
+        }
+        public ActionResult VejalSharChenarUpay()
+        {
+            return View();
+        }
+        public ActionResult IdurDomon()
+        {
+            return View();
+        }
+        public ActionResult ArticleShow()
+        {
+            var articles = db.Articles;
+            return View(articles.ToList());
+        }
+
+        public ActionResult ArticleDetails(int serial, string comment = "", int add = 0)
+        {
+           
+            if (comment != "")
+            {
+                int userId = (int)Session["id"];
+                db.ArticleComments.Add(new ArticleComment() { articleId = serial, userId = userId, comment = comment, commentDate = DateTime.Now });
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Public");
+                }
+            }
+
+            Article article = db.Articles.Find(serial);
+           
+            return View(article);
+        }
+
     }
 }

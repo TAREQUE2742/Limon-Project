@@ -1,0 +1,89 @@
+﻿@model SmartFarmingAssistant.Models.Article
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Article</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.body)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.publishDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.publishDate)
+        </dd>
+
+
+        <dd>
+            <a href="~/Public/ProductDetails?Product=@Model.productId">@Html.DisplayFor(model => model.Product.name) </a>
+        </dd>
+
+    </dl>
+</div>
+
+<hr />
+@if (Session["id"].ToString() != "")
+{
+    <form method="post" action="">
+        @*<input type="hidden" name="userId" value="@Session["id"].ToString()"/>*@
+        <textarea name="comment" class="form-control">@ViewBag.comment</textarea>
+        <input type="submit" class="btn-primary" value="Comment" />
+    </form>
+    <div class="row">
+        @foreach (var item in Model.ArticleComments)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <b>@Session["name"]</b><br />
+                    @item.commentDate
+                </div>
+                <div class="col-md-8">
+                    @item.comment
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<hr />
+@if (Session["id"].ToString() == "")
+{
+    <div class="row">
+        @foreach (var item in Model.ArticleComments)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <b>@item.User.name</b><br />
+                    @item.commentDate
+                </div>
+                <div class="col-md-8">
+                    @item.comment
+                </div>
+            </div>
+        }
+    </div>
+}
+
+

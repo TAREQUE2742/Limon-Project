@@ -1,98 +1,83 @@
-﻿@model IEnumerable<SmartFarmingAssistant.Models.Product>
+﻿
 @{
-    ViewBag.Title = "Product";
+    ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_PublicLayout.cshtml";
 }
 
 
-@ViewBag.message
-<h2 class="container">Product</h2>
-<div class="container search" style="text-align:right">
-    <form method="post" action="">
-        @*<label class=""> Product Search</label>*@
-        <input type="text" name="search" id="search" value="@ViewBag.search">
-        @*@Html.DropDownList("brand", new SelectList(new SmartFarmingAssistant.Models.Innovation002Entities().Brands, "id", "name", ViewBag.brand), "Select", htmlAttributes: new { @class = "control-label col-md-3" })*@
-        <input type="submit" value="Search Product" class="btn btn-default" />
-    </form>
-</div>
+<div style="margin:auto">
+    <br />
+    <br />
 
-<div class="container">
-    <div class="row">
-        @foreach (var iteam in Model)
-        {
-            <div class="col-md-3">
-                <div class="product">
-                    <h2>@iteam.name,@iteam.code</h2>
-                    <a href="../Public/ProductDetails?Product=@iteam.id">
-                        @if (iteam.ProductImages.Count > 0)
-                        {
-                            var v = iteam.ProductImages.First();
-                            @Html.Raw("<img src=\"../uploads/productimages/" + v.id + "_" + v.image1 + "\"title=\"" + iteam.ProductImages.Count + "Images\" />");
-                        }
-                        else
-                        {
-                            <img src="~/uploads/productimages/No image.jpg" />
-                        }
-                    </a>
-                    <div>
-                        <span>@iteam.Brand.name in @iteam.Category.name</span>
-                        <span>Price:@iteam.price</span>
-
-                    </div>
-                    <p>
-                        Description:@iteam.description<br />
-                        @if (iteam.discount > 10)
-                        {
-                            <span class="alert-success">Stock:Available</span>
-                            @Html.ActionLink("Add To cart", "OrderNow", "Public", new { id = iteam.id }, null)
-                            
-                            @Html.ActionLink("Add To Wishlist", "WishList", "Public", new { id = iteam.id }, null)
-
-                            <br>
-                            <span class="alert-success">
-                                Comment:
-                                <a href="../Public/Comment/@iteam.id"></a>@iteam.ProductComments.Count
-                            </span>
-                        }
-                        else
-                        {
-                            <span class="alert-danger">Stock:Out of Stock</span>
-
-                            <br>
-                            <span class="alert-success">
-                                Comment:
-                                <a href="../Public/Comment/@iteam.id"></a>@iteam.ProductComments.Count
-                            </span>
-                        }
-                        <br>
-
-                    </p>
-
-                </div>
+    <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
+    <div id="wowslider-container1">
+        <div class="ws_images">
+            <ul>
+                <li><img src="slider/data/images/1.jpg" alt="SFA" title="SAF" id="wows1_0" /></li>
+                <li><img src="slider/data/images/2.jpg" alt="2" title="2" id="wows1_1" /></li>
+                <li><a href="http://wowslider.net"><img src="slider/data/images/3.jpg" alt="bootstrap carousel" title="3" id="wows1_2" /></a></li>
+                <li><img src="slider/data/images/4.jpg" alt="4" title="4" id="wows1_3" /></li>
+            </ul>
+        </div>
+        <div class="ws_bullets">
+            <div>
+                <a href="#" title="SAF"><span><img src="slider/data/tooltips/1.jpg" alt="SAF" />1</span></a>
+                <a href="#" title="2"><span><img src="slider/data/tooltips/2.jpg" alt="2" />2</span></a>
+                <a href="#" title="3"><span><img src="slider/data/tooltips/3.jpg" alt="3" />3</span></a>
+                <a href="#" title="4"><span><img src="slider/data/tooltips/4.jpg" alt="4" />4</span></a>
             </div>
-        }
+        </div><div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.net">slideshow html code</a> by WOWSlider.com v8.8</div>
+        <div class="ws_shadow"></div>
     </div>
+    <script type="text/javascript" src="slider/scripts/wowslider.js"></script>
+    <script language="javascript" type="text/javascript" src="slider/scripts/script.js"></script>
+    <!-- End WOWSlider.com BODY section -->
+
+    <br />
+    <br />
+
 </div>
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination pagination-lg">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-            </a>
-        </li>
-        @{
-            for (int i = 1; i <= ViewBag.pageNumber; i++)
-            {
-                <li class="page-item">@Html.Raw("<a href=\"../Public/Product?Page=" + i + "\">" + i + " </a>")</li>
-            }
-        }
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+<div class="row">
+    <div class="col-md-6" style="background-color: #808080; border-radius: 10px; padding-right: 5px;">
+        <div class="col-md-12" style="background-color: #1bba0f; margin-top: 10px; margin-bottom: 10px; margin-left: 10px; height: 250px; width: 525px; border-radius: 10px;">
+            <h4>এ সময়ের কৃষি</h4>
+            <img src="images/contents/abc.jpg" style="float: left; margin-right: 40px;" alt="এ সময়ের কৃষি" width="110" height="">
+            <ul>
+                <li>@Html.ActionLink("এ মাসের কৃষি", "EmasherKrishi", "Sfa")</li>
+                <li>@Html.ActionLink("কৃষি আবহাওয়া", "KrishiWeather", "Sfa")</li>
+                <li>@Html.ActionLink("বিশেষ পরামর্শ", "BishesPoramorsho", "Sfa")</li>
+                <li>@Html.ActionLink("সাম্প্রতিক উদ্ভাবন", "SamprotikUdvabon", "Sfa")</li>
+            </ul>
+        </div>
+
+        <div class="col-md-12" style="background-color: #1bba0f; margin-top: 10px; margin-bottom: 10px; margin-left: 10px; height: 250px; width: 525px; border-radius: 10px;">
+            <h4>কৃষি তথ্য</h4>
+            <img src="images/contents/abc.jpg" style="float: left; margin-right: 40px;" alt="কৃষি তথ্য" width="110" height="">
+            <ul>
+                <li>@Html.ActionLink("ফসলের উৎপাদন প্রযুক্তি (ই-কৃষি)", "FosholerUtpadon", "Sfa")</li>
+                <li>@Html.ActionLink("কৃষিভিত্তিক ভিডিও", "KrishiVittikVideo", "Sfa")</li>
+                <li>@Html.ActionLink("কৃষিবিষয়ক তথ্য উপাত্ত", "KrishiVittikTotthoUpatto", "Sfa")</li>
+
+            </ul>
+        </div>
+
+    </div>
+    <div class="col-md-6" style="border-radius: 10px; background-color: #808080; padding-right: 5px;">
+
+        <div class="col-md-12" style="background-color: #1bba0f; margin-top: 10px; margin-bottom: 10px; margin-left: 10px; height: 250px; width: 525px; border-radius: 10px;">
+            <h4>সমসাময়িক কৃষি প্রযুক্তি</h4>
+            <img src="images/contents/abc.jpg" style="float: left; margin-right: 40px;" alt="সমসাময়িক কৃষি প্রযুক্তি" width="110" height="">
+            <ul>
+                <li>@Html.ActionLink("খাটো জাতের নারিকেল চাষ", "KhatoNarikel", "Sfa")</li>
+                <li>@Html.ActionLink("উন্নত পাটের আঁশ প্রাপ্তিতে করণীয়", "UnnotoPat", "Sfa")</li>
+                <li>@Html.ActionLink("ভেজাল সার চেনার উপায়", "VejalSharChenarUpay", "Sfa")</li>
+                <li>@Html.ActionLink("গম ক্ষেতে ইঁদুর দমন ব্যবস্থাপনা", "IdurDomon", "Sfa")</li>
+
+
+            </ul>
+        </div>
+
+    </div>
+
+</div>

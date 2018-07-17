@@ -404,7 +404,6 @@
     <Content Include="Views\Gender\Index.cshtml" />
     <Content Include="Views\MyAccount\Register.cshtml" />
     <Content Include="Views\Shared\_PublicLayout.cshtml" />
-    <Content Include="Views\Public\Index.cshtml" />
     <Content Include="Views\Public\Brand.cshtml" />
     <Content Include="Views\Public\Category.cshtml" />
     <Content Include="Views\Shared\_Subcategory.cshtml" />
@@ -509,8 +508,25 @@
     <Content Include="Views\Article\Details.cshtml" />
     <Content Include="Views\Article\Edit.cshtml" />
     <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Article\ArticleShow.cshtml" />
     <Content Include="Views\Sfa\ArticleShow.cshtml" />
     <Content Include="Views\Sfa\ArticleDetails.cshtml" />
+    <Content Include="Views\Public\Index.cshtml" />
+    <Content Include="Views\Public\KrishiAnchal.cshtml" />
+    <Content Include="Views\Public\Mati.cshtml" />
+    <Content Include="Views\Public\Language.cshtml" />
+    <Content Include="Views\Public\EmasherKrishi.cshtml" />
+    <Content Include="Views\Public\KrishiWeather.cshtml" />
+    <Content Include="Views\Public\BishesPoramorsho.cshtml" />
+    <Content Include="Views\Public\SamprotikUdvabon.cshtml" />
+    <Content Include="Views\Public\FosholerUtpadon.cshtml" />
+    <Content Include="Views\Public\KrishiVittikVideo.cshtml" />
+    <Content Include="Views\Public\KrishiVittikTotthoUpatto.cshtml" />
+    <Content Include="Views\Public\UnnotoPat.cshtml" />
+    <Content Include="Views\Public\VejalSharChenarUpay.cshtml" />
+    <Content Include="Views\Public\IdurDomon.cshtml" />
+    <Content Include="Views\Public\ArticleShow.cshtml" />
+    <Content Include="Views\Public\ArticleDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

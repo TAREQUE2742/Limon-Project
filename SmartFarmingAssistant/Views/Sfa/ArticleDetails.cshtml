@@ -40,12 +40,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.productId)
+            <a href="~/Public/ProductDetails?Product=@Model.productId">@Model.Product.name</a>
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -26,13 +26,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div style="color:black">@Html.ActionLink("SFA ", "Index", "Sfa", new { area = "" }, new { @class = "navbar-brand", Style = "color:black"})</div>
+                <div style="color:black">@Html.ActionLink("Public ", "Index", "Public", new { area = "" }, new { @class = "navbar-brand", Style = "color:black"})</div>
             </div>
             <div class="navbar-collapse collapse">
                 <ul id="" class="nav navbar-nav">
-                    <li>@Html.ActionLink("কৃষি অঞ্চল", "KrishiAnchal", "Sfa", new {Style = "color:black"})</li>
-                    <li>@Html.ActionLink("মাটি", "Mati", "Sfa", new { Style = "color:black" })</li>
-                    <li>@Html.ActionLink("English", "Language", "Sfa", new { Style = "color:black" })</li>
+                    <li>@Html.ActionLink("কৃষি অঞ্চল", "KrishiAnchal", "Public")</li>
+                    <li>@Html.ActionLink("মাটি", "Mati", "Public")</li>
+                    <li>@Html.ActionLink("English", "Language", "Public")</li>
+                    <li>@Html.ActionLink("article", "ArticleShow", "Public")</li>
 
 
                     <li class="nav-item dropdown">
@@ -49,9 +50,9 @@
                             </li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("About", "About", "Public", new { Style = "color:black" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Public", new { Style = "color:black" })</li>
-                    <li>@Html.ActionLink("Recent Article", "ArticleShow", "Sfa", new { Style = "color:black" })</li>
+                    <li>@Html.ActionLink("About", "About", "Public")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Public")</li>
+                    <li>@Html.ActionLink("Recent ", "Index", "Article")</li>
                     
 
                     <li class="active">

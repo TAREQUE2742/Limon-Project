@@ -68,8 +68,8 @@ E:\Final Project\SmartFarmingAssistant\bin\Microsoft.AI.DependencyCollector.xml
 E:\Final Project\SmartFarmingAssistant\bin\Microsoft.AI.ServerTelemetryChannel.xml
 E:\Final Project\SmartFarmingAssistant\bin\Microsoft.AI.WindowsServer.xml
 E:\Final Project\SmartFarmingAssistant\bin\Microsoft.AI.Web.xml
-E:\Final Project\SmartFarmingAssistant\obj\Debug\SmartFarmingAssistant.csprojAssemblyReference.cache
 E:\Final Project\SmartFarmingAssistant\obj\Debug\SmartFarmingAssistant.csproj.CoreCompileInputs.cache
 E:\Final Project\SmartFarmingAssistant\obj\Debug\SmartFarmingAssistant.csproj.CopyComplete
 E:\Final Project\SmartFarmingAssistant\obj\Debug\LimonSelling.dll
 E:\Final Project\SmartFarmingAssistant\obj\Debug\LimonSelling.pdb
+E:\Final Project\SmartFarmingAssistant\obj\Debug\SmartFarmingAssistant.csprojAssemblyReference.cache

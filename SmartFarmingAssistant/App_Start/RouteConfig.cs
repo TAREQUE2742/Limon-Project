@@ -16,8 +16,17 @@ namespace SmartFarmingAssistant
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Sfa", action = "Index", id = UrlParameter.Optional }
+
+
+            defaults: new { controller = "Sfa", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+               name: "Public",
+               url: "{controller}/{action}/{id}",
+
+
+           defaults: new { controller = "Public", action = "Index", id = UrlParameter.Optional }
+           );
         }
     }
 }
