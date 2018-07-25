@@ -518,8 +518,8 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="body" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="body" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
     <Property Name="publishDate" Type="DateTime" Precision="3" />
     <Property Name="productId" Type="Int32" />
     <NavigationProperty Name="Product" Relationship="Innovation002Model.FK__Article__product__477199F1" FromRole="Article" ToRole="Product" />
@@ -532,7 +532,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="articleId" Type="Int32" />
     <Property Name="userId" Type="Int32" />
-    <Property Name="comment" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="comment" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
     <Property Name="commentDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Article" Relationship="Innovation002Model.FK__ArticleCo__artic__4A4E069C" FromRole="ArticleComment" ToRole="Article" />
     <NavigationProperty Name="User" Relationship="Innovation002Model.FK__ArticleCo__userI__4B422AD5" FromRole="ArticleComment" ToRole="User" />

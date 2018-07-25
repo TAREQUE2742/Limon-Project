@@ -34,10 +34,13 @@
         <dd>
             @Html.DisplayFor(model => model.publishDate)
         </dd>
-       
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.name)
+        </dt>
 
         <dd>
-            <a href="~/Public/ProductDetails?Product=@Html.DisplayFor(model=> model.productId)">@Html.DisplayFor(model => model.Product.name) </a>
+            @Html.DisplayFor(model => model.Product.name)
         </dd>
 
     </dl>
@@ -46,3 +49,31 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<hr />
+<div class="row">
+    @foreach (var item in Model.ArticleComments)
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <b>@item.User.name</b><br />
+                @item.commentDate
+            </div>
+            <div>
+                @item.comment
+            </div>
+            <div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        @Html.ActionLink("Delete", "DeleteComment", "Article", new { id = @item.id }, null)
+                        @*<input type="submit" value="Delete" class="btn btn-default" /> |
+                        @Html.ActionLink("Back to List", "Index")*@
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+<hr />

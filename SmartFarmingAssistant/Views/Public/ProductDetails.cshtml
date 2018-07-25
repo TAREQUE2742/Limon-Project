@@ -136,6 +136,7 @@
                 <span class="alert-success">Available</span>
             </dd>
              @Html.ActionLink("Add To cart", "OrderNow", "Public", new { id = Model.id }, null)
+                <br />
              @Html.ActionLink("Continue Shopping", "Product", "Public")
             }
 
@@ -184,7 +185,7 @@
                     <b>@item.User.name</b><br/>
                     @item.dateTime
                 </div>  
-                <div class="col-md-8">
+                <div >
                     @item.comment
                 </div>
             </div>

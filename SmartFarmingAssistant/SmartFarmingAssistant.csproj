@@ -192,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ArticleCommentController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -337,6 +338,11 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\ridmik.min.js" />
+    <Content Include="Scripts\js\ridmikmap.js" />
+    <Content Include="Scripts\js\ridmikparser.js" />
+    <Content Include="Scripts\js\script.js" />
+    <Content Include="Scripts\js\StringBuilder.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -503,12 +509,6 @@
     <Content Include="Views\Sfa\UnnotoPat.cshtml" />
     <Content Include="Views\Sfa\VejalSharChenarUpay.cshtml" />
     <Content Include="Views\Sfa\IdurDomon.cshtml" />
-    <Content Include="Views\Article\Create.cshtml" />
-    <Content Include="Views\Article\Delete.cshtml" />
-    <Content Include="Views\Article\Details.cshtml" />
-    <Content Include="Views\Article\Edit.cshtml" />
-    <Content Include="Views\Article\Index.cshtml" />
-    <Content Include="Views\Article\ArticleShow.cshtml" />
     <Content Include="Views\Sfa\ArticleShow.cshtml" />
     <Content Include="Views\Sfa\ArticleDetails.cshtml" />
     <Content Include="Views\Public\Index.cshtml" />
@@ -527,6 +527,16 @@
     <Content Include="Views\Public\IdurDomon.cshtml" />
     <Content Include="Views\Public\ArticleShow.cshtml" />
     <Content Include="Views\Public\ArticleDetails.cshtml" />
+    <Content Include="Views\Article\Create.cshtml" />
+    <Content Include="Views\Article\Delete.cshtml" />
+    <Content Include="Views\Article\Details.cshtml" />
+    <Content Include="Views\Article\Edit.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\ArticleComment\Create.cshtml" />
+    <Content Include="Views\ArticleComment\Delete.cshtml" />
+    <Content Include="Views\ArticleComment\Details.cshtml" />
+    <Content Include="Views\ArticleComment\Edit.cshtml" />
+    <Content Include="Views\ArticleComment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

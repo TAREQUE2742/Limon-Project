@@ -11,9 +11,7 @@ namespace SmartFarmingAssistant.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Article
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,11 +21,7 @@ namespace SmartFarmingAssistant.Models
         }
     
         public int id { get; set; }
-        [Required]
-        [DisplayName("Headline")]
         public string title { get; set; }
-        [Required]
-        [DataType(DataType.MultilineText)]
         public string body { get; set; }
         public Nullable<System.DateTime> publishDate { get; set; }
         public Nullable<int> productId { get; set; }

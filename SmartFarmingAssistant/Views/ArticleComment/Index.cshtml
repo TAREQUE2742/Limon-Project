@@ -1,0 +1,52 @@
+﻿@model IEnumerable<SmartFarmingAssistant.Models.ArticleComment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.commentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Article.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.commentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Article.title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

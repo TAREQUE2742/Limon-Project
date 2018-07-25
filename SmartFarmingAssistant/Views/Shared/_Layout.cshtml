@@ -6,6 +6,9 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/Scripts/js")
+
+
    
 </head>
 <body>
@@ -37,9 +40,8 @@
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Show Article", "Index", "Article")</li>
                             <li>@Html.ActionLink("Post Article", "Create", "Article")</li>
-                            <li>@Html.ActionLink("Article Details", "Edit", "Article")</li>
-                            <li>@Html.ActionLink("Delete Article", "Delete", "Article")</li>
-                           
+                            <li>@Html.ActionLink("Manage Comment", "Index", "ArticleComment")</li>
+                            
                         </ul>
                     </li>
                    

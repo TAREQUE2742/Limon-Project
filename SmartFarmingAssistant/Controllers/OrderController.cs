@@ -160,6 +160,8 @@ namespace SmartFarmingAssistant.Controllers
             ViewBag.paymentMethodId = new SelectList(db.PaymentMethods, "id", "name", order.paymentMethodId);
             ViewBag.userId = new SelectList(db.Users, "id", "name", order.userId);
             return View(order);
+
+
         }
 
         // POST: Order/Edit/5
@@ -187,8 +189,12 @@ namespace SmartFarmingAssistant.Controllers
             return View(order);
         }
 
-        // GET: Order/Delete/5
-        public ActionResult Delete(int? id)
+        // temp code
+
+ 
+
+    // GET: Order/Delete/5
+    public ActionResult Delete(int? id)
         {   //autheticate
             if (!IsAuthunticate())
             {

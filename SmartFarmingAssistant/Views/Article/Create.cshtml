@@ -5,20 +5,29 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<!-- these are equivalent to ridmik.min.js -->
+<!--
+<script src='js/ridmikmap.js'></script>
+<script src='js/StringBuilder.js'></script>
+<script src='js/ridmikparser.js'></script>
+-->
+<script src='Scripts/js/ridmik.min.js'></script>
+<script src="Scripts/js/script.js"></script>
+
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Article</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <p>Title: </p>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control",id="bangla" } })
                 @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,12 +35,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.body, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.body, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.body, new { htmlAttributes = new { @class = "form-control", id="bangla2" } })
                 @Html.ValidationMessageFor(model => model.body, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        
+
+
         <div class="form-group">
             @Html.LabelFor(model => model.productId, "productId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -51,3 +61,11 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/js/")
+}
+<script src="~/Scripts/js/ridmikparser.js"></script>
+<script src="~/Scripts/js/ridmikmap.js"></script>
+<script src="~/Scripts/js/script.js"></script>
+<script src="~/Scripts/js/StringBuilder.js"></script>
