@@ -12,18 +12,58 @@ namespace LimonSelling.Controllers
 {
     public class ArticleController : Controller
     {
+        //authenticate
+        public bool IsAuthunticate()
+        {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                return false;
+            }
+            else if (Session["type"].ToString() != "Admin")
+            {
+                return false;
+            }
+            return true;
+        }
         private Innovation002Entities db = new Innovation002Entities();
 
         // GET: Article
-        public ActionResult Index()
+        public ActionResult Index(string search = "", int page = 1)
         {
-            var articles = db.Articles.Include(a => a.Product);
-            return View(articles.ToList());
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
+           
+            var articles = db.Articles.Include(a => a.Product).ToList();
+            if (search != "")
+                articles = articles.Where(ps => ps.title.ToLower().Contains(search.ToLower()) || ps.Product.name.ToLower().Contains(search.ToLower())).ToList();
+            if (search == "")
+            {
+                ViewBag.message = "No match article found";
+            }
+            //pagenumber
+            int numberofiteam = 3;
+            int skip = (page - 1) * numberofiteam;
+            articles = articles.OrderBy(b => b.title).Skip(skip).Take(numberofiteam).ToList();
+            int total = db.Articles.Count();
+            int pageNumber = total / numberofiteam;
+            if (total % numberofiteam != 0)
+                pageNumber++;
+            ViewBag.pageNumber = pageNumber;
+
+            return View(articles);
         }
 
         // GET: Article/Details/5
         public ActionResult Details(int? id)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -40,6 +80,11 @@ namespace LimonSelling.Controllers
         // GET: Article/Create
         public ActionResult Create()
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             ViewBag.productId = new SelectList(db.Products, "id", "name");
             return View();
         }
@@ -51,6 +96,11 @@ namespace LimonSelling.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,title,body,publishDate,productId")] Article article)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             article.publishDate = DateTime.Now;
             if (ModelState.IsValid)
             {
@@ -66,6 +116,11 @@ namespace LimonSelling.Controllers
         // GET: Article/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -86,6 +141,11 @@ namespace LimonSelling.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,title,body,publishDate,productId")] Article article)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             article.publishDate = DateTime.Now;
             if (ModelState.IsValid)
             {
@@ -100,6 +160,11 @@ namespace LimonSelling.Controllers
         // GET: Article/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -117,6 +182,11 @@ namespace LimonSelling.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             Article article = db.Articles.Find(id);
             db.Articles.Remove(article);
             db.SaveChanges();
@@ -124,6 +194,11 @@ namespace LimonSelling.Controllers
         }
         public ActionResult DeleteComment(int id)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             ArticleComment ac = db.ArticleComments.Find(id);
             db.ArticleComments.Remove(ac);
             db.SaveChanges();

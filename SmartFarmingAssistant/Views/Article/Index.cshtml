@@ -6,10 +6,19 @@
 }
 
 <h2>Index</h2>
+@ViewBag.message
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<div class="container search" style="text-align:right">
+    <form method="post" action="">
+        @*<label class=""> Product Search</label>*@
+        <input type="text" name="search" id="search" value="@ViewBag.search">
+        @*@Html.DropDownList("brand", new SelectList(new SmartFarmingAssistant.Models.Innovation002Entities().Brands, "id", "name", ViewBag.brand), "Select", htmlAttributes: new { @class = "control-label col-md-3" })*@
+        <input type="submit" value="Search Article" class="btn btn-default" />
+    </form>
+</div>
 <table class="table">
     <tr>
         <th>
@@ -50,3 +59,11 @@
 }
 
 </table>
+<div class="pagination">
+    @{
+        for (int i = 1; i <= ViewBag.pageNumber; i++)
+        {
+            @Html.Raw("<a href=\"../Article/Index?Page=" + i + "\">Page " + i + " </a>");
+        }
+    }
+</div>

@@ -505,10 +505,25 @@ namespace SmartFarmingAssistant.Controllers
         {
             return View();
         }
-        public ActionResult ArticleShow()
+        public ActionResult ArticleShow(string search = "", int page = 1)
         {
-            var articles = db.Articles;
-            return View(articles.ToList());
+            var articles = db.Articles.ToList();
+            if (search != "")
+                articles = articles.Where(ps => ps.title.ToLower().Contains(search.ToLower()) || ps.Product.name.ToLower().Contains(search.ToLower())).ToList();
+            if (search == "")
+            {
+                ViewBag.message = "No match article found";
+            }
+            //pagenumber
+            int numberofiteam = 3;
+            int skip = (page - 1) * numberofiteam;
+            articles = articles.OrderBy(b => b.title).Skip(skip).Take(numberofiteam).ToList();
+            int total = db.Articles.Count();
+            int pageNumber = total / numberofiteam;
+            if (total % numberofiteam != 0)
+                pageNumber++;
+            ViewBag.pageNumber = pageNumber;
+            return View(articles);
         }
 
         public ActionResult ArticleDetails(int serial, string comment = "", int add = 0)

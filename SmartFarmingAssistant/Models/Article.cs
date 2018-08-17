@@ -11,7 +11,8 @@ namespace SmartFarmingAssistant.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Article
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +22,19 @@ namespace SmartFarmingAssistant.Models
         }
     
         public int id { get; set; }
+        [Required(ErrorMessage ="Please Give Title")]
+        [Display(Name ="Title")]
+        [StringLength(maximumLength:200,MinimumLength =3)]
         public string title { get; set; }
+        [Required(ErrorMessage = "Please Give Title")]
+        [Display(Name = "Body")]
+        [DataType(DataType.MultilineText)]
+        [StringLength(maximumLength: 4000, MinimumLength = 3)]
         public string body { get; set; }
+        [Display(Name ="Publish Date")]
         public Nullable<System.DateTime> publishDate { get; set; }
+        [Required]
+        [Display(Name ="Product Name")]
         public Nullable<int> productId { get; set; }
     
         public virtual Product Product { get; set; }

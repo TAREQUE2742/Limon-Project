@@ -11,11 +11,14 @@ namespace SmartFarmingAssistant.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ArticleComment
     {
         public int id { get; set; }
         public Nullable<int> articleId { get; set; }
+        [Required]
+        [Display(Name ="User Name")]
         public Nullable<int> userId { get; set; }
         public string comment { get; set; }
         public Nullable<System.DateTime> commentDate { get; set; }

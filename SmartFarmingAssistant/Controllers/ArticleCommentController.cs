@@ -12,11 +12,29 @@ namespace LimonSelling.Controllers
 {
     public class ArticleCommentController : Controller
     {
+        //authenticate
+        public bool IsAuthunticate()
+        {
+            if (Session["type"] == null || Session["type"].ToString() == "")
+            {
+                return false;
+            }
+            else if (Session["type"].ToString() != "Admin")
+            {
+                return false;
+            }
+            return true;
+        }
         private Innovation002Entities db = new Innovation002Entities();
 
         // GET: ArticleComment
         public ActionResult Index()
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             var articleComments = db.ArticleComments.Include(a => a.Article).Include(a => a.User);
             return View(articleComments.ToList());
         }
@@ -24,6 +42,11 @@ namespace LimonSelling.Controllers
         // GET: ArticleComment/Details/5
         public ActionResult Details(int? id)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +62,11 @@ namespace LimonSelling.Controllers
         // GET: ArticleComment/Create
         public ActionResult Create()
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             ViewBag.articleId = new SelectList(db.Articles, "id", "title");
             ViewBag.userId = new SelectList(db.Users, "id", "name");
             return View();
@@ -51,6 +79,11 @@ namespace LimonSelling.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,articleId,userId,comment,commentDate")] ArticleComment articleComment)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             if (ModelState.IsValid)
             {
                 db.ArticleComments.Add(articleComment);
@@ -66,6 +99,11 @@ namespace LimonSelling.Controllers
         // GET: ArticleComment/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,6 +125,11 @@ namespace LimonSelling.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,articleId,userId,comment,commentDate")] ArticleComment articleComment)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(articleComment).State = EntityState.Modified;
@@ -101,6 +144,11 @@ namespace LimonSelling.Controllers
         // GET: ArticleComment/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,6 +166,11 @@ namespace LimonSelling.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
             ArticleComment articleComment = db.ArticleComments.Find(id);
             db.ArticleComments.Remove(articleComment);
             db.SaveChanges();

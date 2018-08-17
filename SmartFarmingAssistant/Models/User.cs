@@ -11,7 +11,8 @@ namespace SmartFarmingAssistant.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,6 +25,8 @@ namespace SmartFarmingAssistant.Models
         }
     
         public int id { get; set; }
+        [Required]
+        [Display(Name ="User Name")]
         public string name { get; set; }
         public string contact { get; set; }
         public string email { get; set; }
