@@ -26,15 +26,42 @@ namespace SmartFarmingAssistant.Models
     
         public int id { get; set; }
         [Required]
-        [Display(Name ="User Name")]
+        [Display(Name = "Customer")]
+        [StringLength(maximumLength: 35, MinimumLength = 3)]
         public string name { get; set; }
+        [Required]
+        [Display(Name = "Phone")]
+        [StringLength(maximumLength: 35, MinimumLength = 3)]
+        [DataType(DataType.PhoneNumber)]
         public string contact { get; set; }
+        [Required]
+        [Display(Name = "Email")]
+        [EmailAddress(ErrorMessage = "The email address is not valid")]
         public string email { get; set; }
+        [Required]
+        [Display(Name = "Password")]
+        [DataType(DataType.Password)]
+        [StringLength(maximumLength: 35, MinimumLength = 3)]
         public string password { get; set; }
+        
+        [Display(Name = "Date")]
+        
         public Nullable<System.DateTime> createDate { get; set; }
+        [Required]
+        [Display(Name = "Gender")]
+        
         public int genderId { get; set; }
+        
+        [Display(Name = "Type")]
+        
         public string type { get; set; }
+        [Required]
+        [Display(Name = "Address")]
+        [StringLength(maximumLength: 35, MinimumLength = 3)]
         public string address { get; set; }
+        [Required]
+        [Display(Name = "City")]
+       
         public int cityId { get; set; }
     
         public virtual City City { get; set; }

@@ -537,6 +537,7 @@
     <Content Include="Views\ArticleComment\Details.cshtml" />
     <Content Include="Views\ArticleComment\Edit.cshtml" />
     <Content Include="Views\ArticleComment\Index.cshtml" />
+    <Content Include="Views\Product\ProductStock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

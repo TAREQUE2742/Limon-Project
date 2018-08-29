@@ -181,6 +181,7 @@ namespace SmartFarmingAssistant.Controllers
             {
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
+               
                 return RedirectToAction("Index");
             }
             ViewBag.cityId = new SelectList(db.Cities, "id", "name", order.cityId);
@@ -231,11 +232,33 @@ namespace SmartFarmingAssistant.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Report()
-        {
-            return View();
-        }
+        //report generate
 
+        public ActionResult Report(int page = 1, string search = "")
+        {   //autheticate
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
+            //authenticate
+            var orders = db.Orders.Include(o => o.City).Include(o => o.PaymentMethod).Include(o => o.User);
+            //search
+            if (search != "")
+                orders = orders.Where(ps => ps.User.name.ToLower().Contains(search.ToLower()) || ps.City.name.ToLower().Contains(search.ToLower()) || ps.status.ToLower().Contains(search.ToLower()) || ps.number.ToLower().Contains(search.ToLower()) || ps.total.ToString().Contains(search.ToLower()));
+            ViewBag.search = search;
+            //end serach
+            int numberofiteam = 2;
+            int skip = (page - 1) * numberofiteam;
+
+            orders = orders.OrderBy(b => b.number).Skip(skip).Take(numberofiteam);
+            int total = db.Orders.Count();
+            int pageNumber = total / numberofiteam;
+            if (total % numberofiteam != 0)
+                pageNumber++;
+            ViewBag.pageNumber = pageNumber;
+            return View(orders);
+        }
 
 
         protected override void Dispose(bool disposing)

@@ -11,13 +11,26 @@ namespace SmartFarmingAssistant.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class OrderDetail
     {
         public int orderId { get; set; }
+        [Required]
+        [Display(Name = "Product")]
+        
         public int productId { get; set; }
+        [Required]
+        [Display(Name = "Quantity")]
+        
         public int quantity { get; set; }
+        
+        [Display(Name = "Rate")]
+        
         public Nullable<double> rate { get; set; }
+        
+        [Display(Name = "Remarks")]
+        
         public string remarks { get; set; }
     
         public virtual Product Product { get; set; }

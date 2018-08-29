@@ -20,42 +20,8 @@ namespace SmartFarmingAssistant.Controllers
     {
         
         private Innovation002Entities db = new Innovation002Entities();
-        // GET: Public
-        //public ActionResult Index(int brand = 0, int category = 0, int add = 0, string search = "", int page = 1)
-        //{
-
-        //    var product = db.Products.ToList();
-        //    if (brand > 0)
-        //    {
-        //        product = product.Where(p => p.brandId == brand).ToList();
-
-        //    }
-
-        //    if (category > 0)
-        //    {
-        //        product = product.Where(p => p.categoryId == category).ToList();
-        //    }
-        //    if (search != "")
-        //        product = product.Where(ps => ps.name.ToLower().Contains(search.ToLower()) || ps.Brand.name.ToLower().Contains(search.ToLower()) || ps.Category.name.ToLower().Contains(search.ToLower()) || ps.price.ToString().Contains(search.ToLower())).ToList();
-        //    if (search == "")
-        //    {
-        //        ViewBag.notfound = "No match product found";
-        //    }
-
-        //    //pagenumber
-        //    int numberofiteam = 8;
-        //    int skip = (page - 1) * numberofiteam;
-        //    product = product.OrderBy(b => b.name).Skip(skip).Take(numberofiteam).ToList();
-        //    int total = db.Products.Count();
-        //    int pageNumber = total / numberofiteam;
-        //    if (total % numberofiteam != 0)
-        //        pageNumber++;
-        //    ViewBag.pageNumber = pageNumber;
-
-        //    ViewBag.category = category;
-        //    return View(product);
-
-        //}
+        
+        
         // GET: Public
         public ActionResult Brand()
         {
@@ -115,7 +81,7 @@ namespace SmartFarmingAssistant.Controllers
         }
 
 
-        // GET: wishlist
+      
        
       
         public ActionResult About()
@@ -127,38 +93,7 @@ namespace SmartFarmingAssistant.Controllers
             return View();
         }
 
-        public ActionResult NewArrival(int page = 1)
-        {
-            try
-            {
-                var date = DateTime.Now.AddDays(-1);
-                var v = db.Products.Where(p =>
-                    p.lastUpdate.Value.Year == date.Year && p.lastUpdate.Value.Month == date.Month &&
-                    p.lastUpdate.Value.Day >= date.Day);
-                //var v=db.Products.Where(p=>p.lastUpdate.Value.Month>DateTime.Now.AddDays(-1));
-                //serach
-               
-                //page number
-                int numberofiteam = 2;
-                int skip = (page - 1) * numberofiteam;
-                v = v.OrderBy(b => b.name).Skip(skip).Take(numberofiteam);
-                int total = db.Products.Count();
-                int pageNumber = total / numberofiteam;
-                if (total % numberofiteam != 0)
-                    pageNumber++;
-                ViewBag.pageNumber = pageNumber;
-               
-                return View(v.ToList());
-            }
-
-            catch (Exception)
-            {
-                return RedirectToAction("Product", "Public");
-            }
-
-            
-
-        }
+        
 
         public ActionResult ProductDetails(int Product,string comment="",int add=0)
         {
@@ -365,69 +300,7 @@ namespace SmartFarmingAssistant.Controllers
             ViewBag.message = "Your Cart is Empty";
             return View();
         }
-        public ActionResult WishList(int id)
-        {
-            if (Session["wish"] == null)
-            {
-                List<Item> wish = new List<Item>();
-                wish.Add(new Item(db.Products.Find(id), 1));
-                Session["wish"] = wish;
-
-            }
-            else
-            {
-
-                List<Item> wish = (List<Item>)Session["wish"];
-                int index = WishExisting(id);
-                if (index == -1)
-                {
-                    wish.Add(new Item(db.Products.Find(id), 1));
-
-                }
-                 
-                else
-                    try
-                    {  
-                        return RedirectToAction("MyWishListExisting", "Public");
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-            }
-            return View("WishList");
-        }
-        private int WishExisting(int id)
-        {
-            List<Item> wish = (List<Item>)Session["wish"];
-            for (int i = 0; i < wish.Count; i++)
-                if (wish[i].Pr.id == id)
-                    return i;
-            return -1;
-        }
-        public ViewResult MyWishListExisting()
-        {
-            ViewBag.wishMessage = "Already added in your wish list";
-            return View();
-        }
-        public ViewResult MyWishList()
-        {
-            ViewBag.message = "Your wish List is Empty";
-            return View();
-        }
-
-        public ActionResult DeleteWish(int id)
-        {
-            int index = WishExisting(id);
-            List<Item> wish = (List<Item>)Session["wish"];
-            wish.RemoveAt(index);
-            Session["wish"] = wish;
-
-            return View("MyWishList");
-        }
-        
-
+       
 
         public ViewResult MessageError()
         {

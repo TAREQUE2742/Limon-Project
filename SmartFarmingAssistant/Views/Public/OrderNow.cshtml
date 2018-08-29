@@ -31,7 +31,7 @@
             <td>@item.Pr.id</td>
             <td><a href="../ProductDetails?Product=@item.Pr.id">@item.Pr.name</a></td>
             <td>@item.Pr.price</td>
-            <td><input type="text" name="Qty" value="@item.Qty" /><input type="submit" name="submit" value="Update" /></td>
+            <td><input required type="number" min="1" max="@item.Pr.discount"  name="Qty" value="@item.Qty" /><input type="submit" name="submit" value="Update" /></td>
             <td>@(item.Pr.price * item.Qty) TK</td>
 
         </tr>

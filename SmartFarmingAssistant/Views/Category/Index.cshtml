@@ -18,9 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.description)
         </th>
-        <th>
+        @*<th>
             Sub-Category
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -32,9 +32,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.description)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Category2.name)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
             @Html.ActionLink("Details", "Details", new { id=item.id }) |

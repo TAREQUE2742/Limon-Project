@@ -1,0 +1,85 @@
+﻿@model IEnumerable<SmartFarmingAssistant.Models.Product>
+
+@{
+    ViewBag.Title = "Product Stock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product Stock</h2>
+<div class="container search">
+    <form method="post" action="">
+        @*<label class=""> Product Search</label>*@
+        @Html.DropDownList("brand", new SelectList(new SmartFarmingAssistant.Models.Innovation002Entities().Brands, "id", "name", ViewBag.brand), "Select", htmlAttributes: new { @class = "control-label col-md-2" })
+        <input type="submit" value="Search By Brand" class="btn btn-default" />
+    </form>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.discount)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Brand.name)
+        </th>
+        <th>
+            Message
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.discount)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.name)
+            </td>
+
+            <td>
+                @if (item.discount > 30)
+                {
+                    <span class="alert-success"> Product is available</span>
+                }
+                else
+                {
+                    <span class="alert-danger">Update Product Quantity</span>
+                }
+
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="pagination">
+    @{
+        for (int i = 1; i <= ViewBag.pageNumber; i++)
+        {
+            @Html.Raw("<a href=\"../Product/ProductStock?Page=" + i + "\">Page " + i + " </a>");
+        }
+    }
+</div>

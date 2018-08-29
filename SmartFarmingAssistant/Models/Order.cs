@@ -11,7 +11,8 @@ namespace SmartFarmingAssistant.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,15 +22,34 @@ namespace SmartFarmingAssistant.Models
         }
     
         public int id { get; set; }
+        
+        
         public Nullable<System.DateTime> dateTime { get; set; }
+        
         public string number { get; set; }
+        
         public int userId { get; set; }
+        
+       
+        
         public Nullable<double> deliveryCharge { get; set; }
+        
+        
+        
         public Nullable<double> otherCharge { get; set; }
+        
+       
         public Nullable<double> total { get; set; }
+        
+        
         public Nullable<int> paymentMethodId { get; set; }
+        
         public string deliveryAddress { get; set; }
+        
+        
         public int cityId { get; set; }
+        
+        
         public string status { get; set; }
     
         public virtual City City { get; set; }

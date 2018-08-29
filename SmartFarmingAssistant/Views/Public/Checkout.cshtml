@@ -42,7 +42,7 @@ else
                     <td>@item.Pr.id</td>
                     <td>@item.Pr.name</td>
                     <td>@item.Pr.price</td>
-                    <td><input type="text" name="Qty" value="@item.Qty" readonly /></td>
+                    <td>@item.Qty</td>
                     <td>@(item.Pr.price * item.Qty)</td>
                 </tr>
 
@@ -59,7 +59,7 @@ else
             <div class="form-group">
                 @Html.LabelFor(model => model.number, "Mobile Number", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.number, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.number, new { htmlAttributes = new { @class = "form-control" ,type="number"} })
                     @Html.ValidationMessageFor(model => model.number, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -119,7 +119,7 @@ else
 
     }
     @Html.ActionLink("Continue Shopping", "Product", "Public");
-    @Html.ActionLink("Checkout", "Checkout", "Public");
+    @*@Html.ActionLink("Checkout", "Checkout", "Public");*@
 }
 
 @*<a href="javascript:void(0);" onclick="history.go(-1);">Continue Shopping</a>*@

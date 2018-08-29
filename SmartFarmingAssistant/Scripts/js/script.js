@@ -41,7 +41,7 @@ function setCaretPositiono(ctrl, pos) {
 
 	elem1.onkeypress = function(e){
 		var x = (window.event) ? e.keyCode : e.which; 
-		console.log("pressed");
+		console.log("pressed 0");
 
 		if(ctrlPressed || !banglaMode)
 			x = -1;
@@ -59,7 +59,6 @@ function setCaretPositiono(ctrl, pos) {
 		}
 		return true;
 	}
-	
 	elem1.onkeydown = function(e){
 		var x = (window.event) ? e.keyCode : e.which;
 		if(x == 17){
@@ -68,23 +67,24 @@ function setCaretPositiono(ctrl, pos) {
 		}
 		// for chrome, when control is pressed, other keys go through keydown
 		// and for firefox it goes through both keydown & keypress 
-		if((x == 109 || x == 77) && ctrlPressed){
-			banglaMode = !banglaMode;
-			writing = "";
-			phLen = 0;
-		}
+        if ((x == 109 || x == 77) && ctrlPressed) {
+            banglaMode = !banglaMode;
+            writing = "";
+            phLen = 0;
+        } 
 		
-	}
+}
+    elem1.onkeyup = function (e) {
+    var x = (window.event) ? e.keyCode : e.which;
+    if (x == 17) {
+        ctrlPressed = false;
+    } else if (x == 8) { // for chrome, backspace is not in keypress event
+        writing = "";
+        phLen = 0;
+    }
+}
 	
-	elem1.onkeyup = function(e){
-		var x = (window.event) ? e.keyCode : e.which;
-		if(x == 17){
-			ctrlPressed = false;
-		}else if(x == 8){ // for chrome, backspace is not in keypress event
-			writing = "";
-			phLen = 0;
-		}
-	}
+	
 //});
 
 
@@ -98,7 +98,7 @@ ctrlPressed = false;
 
 elem2.onkeypress = function (e) {
     var x = (window.event) ? e.keyCode : e.which;
-    alert("pressed");
+    console.log("pressed 1");
 
     if (ctrlPressed || !banglaMode)
         x = -1;

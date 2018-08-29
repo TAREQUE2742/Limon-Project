@@ -32,19 +32,21 @@
                             <li>@Html.ActionLink("Category", "Index", "Category")</li>
                             <li>@Html.ActionLink("Product", "Index", "Product")</li>
                             <li>@Html.ActionLink("Product Image", "Index", "ProductImage")</li>
-                            <li>@Html.ActionLink("Stock", "Index", "ProductStock")</li>
+                            <li>@Html.ActionLink("Stock", "ProductStock", "Product")</li>
+                            <li>@Html.ActionLink("Report", "Report", "Order")</li>
                         </ul>
                     </li>
+                    
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Article Section <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Show Article", "Index", "Article")</li>
                             <li>@Html.ActionLink("Post Article", "Create", "Article")</li>
-                            <li>@Html.ActionLink("Manage Comment", "Index", "ArticleComment")</li>
                             
+
                         </ul>
                     </li>
-                   
+
                     @*<li>@Html.ActionLink("Brand", "Index", "Brand")</li>
         <li>@Html.ActionLink("Category", "Index", "Category")</li>
         <li>@Html.ActionLink("Product", "Index", "Product")</li>

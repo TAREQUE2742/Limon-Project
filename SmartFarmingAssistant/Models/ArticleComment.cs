@@ -20,7 +20,10 @@ namespace SmartFarmingAssistant.Models
         [Required]
         [Display(Name ="User Name")]
         public Nullable<int> userId { get; set; }
+        [Required]
+        [Display(Name ="Comment")]
         public string comment { get; set; }
+        [Display(Name ="Date")]
         public Nullable<System.DateTime> commentDate { get; set; }
     
         public virtual Article Article { get; set; }

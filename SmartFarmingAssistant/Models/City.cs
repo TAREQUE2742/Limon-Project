@@ -11,7 +11,8 @@ namespace SmartFarmingAssistant.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class City
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +23,13 @@ namespace SmartFarmingAssistant.Models
         }
     
         public int id { get; set; }
+        [Required]
+        [Display(Name = "City")]
+        [StringLength(maximumLength: 35, MinimumLength = 3)]
         public string name { get; set; }
+        [Required]
+        [Display(Name = "Country")]
+       
         public int countryId { get; set; }
     
         public virtual Country Country { get; set; }

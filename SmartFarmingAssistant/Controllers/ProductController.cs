@@ -206,6 +206,31 @@ namespace SmartFarmingAssistant.Controllers
                 return RedirectToAction("DbError","Product");
             }
         }
+        //product stock
+        public ActionResult ProductStock(int brand = 0, int page = 1)
+        {    //autheticate
+            if (!IsAuthunticate())
+            {
+
+                return RedirectToAction("Login", "MyAccount");
+            }
+            //authenticate
+            var products = db.Products.Include(p => p.Brand).Include(p => p.Category);
+
+            if (brand > 0)
+                products = products.Where(pb => pb.brandId == brand);
+            //page number
+            int numberofiteam = 10;
+            int skip = (page - 1) * numberofiteam;
+            products = products.OrderBy(b => b.name).Skip(skip).Take(numberofiteam);
+            int total = db.Products.Count();
+            int pageNumber = total / numberofiteam;
+            if (total % numberofiteam != 0)
+                pageNumber++;
+            ViewBag.pageNumber = pageNumber;
+            //products = products.Where(p => p.discount > 300);
+            return View(products.ToList());
+        }
 
         public ViewResult DbError()
         {

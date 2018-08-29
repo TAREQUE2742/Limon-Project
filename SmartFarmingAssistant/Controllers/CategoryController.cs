@@ -89,6 +89,7 @@ namespace SmartFarmingAssistant.Controllers
                 return RedirectToAction("Login", "MyAccount");
             }
             //authenticate
+            
             if (ModelState.IsValid)
             {
                 db.Categories.Add(category);

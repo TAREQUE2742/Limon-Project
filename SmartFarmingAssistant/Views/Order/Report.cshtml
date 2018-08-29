@@ -1,58 +1,89 @@
-﻿@model IEnumerable<SmartFarmingAssistant.Models.OrderDetail>
+﻿@model IEnumerable<SmartFarmingAssistant.Models.Order>
 
 @{
     ViewBag.Title = "Report";
-    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Report</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.rate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.remarks)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Product.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Order.number)
-        </th>
-        <th></th>
-    </tr>
+<div class="admin search">
+    <form method="post" action="">
+        @*<label class=""> Product Search</label>*@
+        <input type="text" name="search" id="search" value="@ViewBag.search" placeholder="search">
+        @*@Html.DropDownList("brand", new SelectList(new LimonSelling.Models.Innovation002Entities().Brands, "id", "name", ViewBag.brand), "Select", htmlAttributes: new { @class = "control-label col-md-3" })*@
+        <input type="submit" value="Search Order" class="btn btn-default" />
+    </form>
+</div>
+<div id="div_print">
+    <table class="table">
+        <tr>
+            <th>
+                Order Id:
+            </th>
+            <th>
+                Customer Name
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.rate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.remarks)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Order.number)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+            <th>
+                @Html.DisplayNameFor(model => model.dateTime)
+            </th>
 
-</table>
+            <th>
+                @Html.DisplayNameFor(model => model.total)
+            </th>
+
+
+
+            <th></th>
+        </tr>
+        @{
+            double t = 0;
+        }
+        @foreach (var item in Model)
+        {
+            t = t + (int)item.total;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateTime)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.total)
+                </td>
+
+                <td></td>
+            </tr>
+        }
+        <tr><content>Total:@t tk</content></tr>
+    </table>
+
+    <input name="b_print" type="button" class="ipt" onClick="printdiv('div_print');" value=" Print ">
+</div>
+<div class="pagination">
+    @{
+        for (int i = 1; i <= ViewBag.pageNumber; i++)
+        {
+            @Html.Raw("<a href=\"../Order?Page=" + i + "\">Page " + i + " </a>");
+        }
+    }
+</div>
+<script>
+    function printdiv(printpage) {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var newstr = document.all.item(printpage).innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr + newstr + footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
+</script>

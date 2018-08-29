@@ -29,16 +29,43 @@ namespace SmartFarmingAssistant.Models
     
         public int id { get; set; }
         [Required]
-        [Display(Name ="Product Name")]
+        [Display(Name = "Product")]
+        [StringLength(maximumLength: 35, MinimumLength = 3)]
         public string name { get; set; }
+        [Required]
+        [Display(Name = "Code")]
+        [StringLength(maximumLength: 35, MinimumLength = 2)]
         public string code { get; set; }
+        [Required]
+        [Display(Name = "Tag")]
+        [StringLength(maximumLength: 35, MinimumLength = 2)]
         public string tag { get; set; }
+        [Required]
+        [Display(Name = "Category")]
+        
         public int categoryId { get; set; }
+        [Required]
+        [Display(Name = "Brand")]
         public int brandId { get; set; }
+        [Required]
+        [Display(Name = "Description")]
+        [StringLength(maximumLength: 35, MinimumLength = 3)]
         public string description { get; set; }
+        [Required]
+        [Display(Name = "Price")]
+        
         public int price { get; set; }
+        
+        [Display(Name = "Weight")]
+        
         public double weight { get; set; }
+        [Required]
+        [Display(Name = "Quantity")]
+        
         public int discount { get; set; }
+        
+        [Display(Name = "Date")]
+        
         public Nullable<System.DateTime> lastUpdate { get; set; }
     
         public virtual Brand Brand { get; set; }
